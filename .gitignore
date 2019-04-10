@@ -1,0 +1,10 @@
+.DS_Store
+**/junit.xml
+npm-debug.log
+yarn-error.log
+node_modules
+package-lock.json
+dist
+.idea
+.vscode/
+docs/build/
