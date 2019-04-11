@@ -6,10 +6,11 @@ import newHttpRequest from './httpRequest';
 export default function makeNodePlatform(options) {
   const storagePath = path.join(options.localStoragePath || '.', 'ldclient-user-cache');
   const storage = new LocalStorage(storagePath);
+  const tlsParams = filterTlsParams(options.tlsParams);
 
   const ret = {};
 
-  ret.httpRequest = (method, url, headers, body) => newHttpRequest(options, method, url, headers, body);
+  ret.httpRequest = (method, url, headers, body) => newHttpRequest(method, url, headers, body, tlsParams);
   // Note that the common code also allows newHttpRequest to take a "synchronous" parameter, but that is only
   // meaningful in a browser so it's ignored here.
 
@@ -36,11 +37,31 @@ export default function makeNodePlatform(options) {
       }),
   };
 
-  ret.eventSourceFactory = (url, options) => new EventSource(url, options);
+  ret.eventSourceFactory = (url, options) => new EventSource(url, Object.assign({}, tlsParams, options));
   ret.eventSourceIsActive = es => es.readyState === EventSource.OPEN || es.readyState === EventSource.CONNECTING;
   ret.eventSourceAllowsReport = true;
 
   ret.userAgent = 'NodeClientSide';
 
   return ret;
+}
+
+const httpsOptions = [
+  'pfx',
+  'key',
+  'passphrase',
+  'cert',
+  'ca',
+  'ciphers',
+  'rejectUnauthorized',
+  'secureProtocol',
+  'servername',
+  'checkServerIdentity',
+];
+
+function filterTlsParams(tlsParams) {
+  const input = tlsParams || {};
+  return Object.keys(input)
+    .filter(key => httpsOptions.includes(key))
+    .reduce((obj, key) => Object.assign({}, obj, { [key]: input[key] }), {});
 }
