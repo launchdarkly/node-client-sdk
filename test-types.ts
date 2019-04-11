@@ -3,11 +3,11 @@
 // to validate our typings.d.ts file.
 
 import {
-	createConsoleLogger,
-	LDClient,
-	LDLogger,
-	LDOptions,
-	LDUser,
+  createConsoleLogger,
+  LDClient,
+  LDLogger,
+  LDOptions,
+  LDUser,
   initialize
 } from 'launchdarkly-node-client-sdk';
 
