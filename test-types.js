@@ -22,7 +22,8 @@ var allOptions = {
     flushInterval: 1,
     samplingInterval: 1,
     streamReconnectDelay: 1,
-    logger: logger
+    logger: logger,
+    localStoragePath: '.'
 };
 var user = { key: 'user' };
 var client = launchdarkly_node_client_sdk_1.initialize('env', user, allOptions);

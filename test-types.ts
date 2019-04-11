@@ -30,7 +30,8 @@ var allOptions: LDOptions = {
   flushInterval: 1,
   samplingInterval: 1,
   streamReconnectDelay: 1,
-  logger: logger
+  logger: logger,
+  localStoragePath: '.'
 };
 var user: LDUser = { key: 'user' };
 var client: LDClient = initialize('env', user, allOptions);
