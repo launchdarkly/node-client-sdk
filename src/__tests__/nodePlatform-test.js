@@ -3,7 +3,7 @@ import * as httpServer from './http-server';
 
 describe('nodePlatform', () => {
   const platform = nodePlatform({});
-  const lsKeyPrefix = 'ldclient-electron-test:';
+  const lsKeyPrefix = 'ldclient-node-client-test:';
 
   describe('httpRequest()', () => {
     const path = '/path';

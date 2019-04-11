@@ -1,9 +1,10 @@
 import { LocalStorage } from 'node-localstorage';
 import { EventSource } from 'launchdarkly-eventsource';
+import path from 'path';
 import newHttpRequest from './httpRequest';
 
 export default function makeNodePlatform(options) {
-  const storagePath = (options.localStoragePath || '.') + './ldclient-user-cache';
+  const storagePath = path.join(options.localStoragePath || '.', 'ldclient-user-cache');
   const storage = new LocalStorage(storagePath);
 
   const ret = {};

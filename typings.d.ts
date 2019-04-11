@@ -50,7 +50,7 @@ declare module 'launchdarkly-node-client-sdk' {
    *
    * Applications should configure the client at startup time with [[initialize]], and reuse the same instance.
    *
-   * For more information, see the [SDK Reference Guide](http://docs.launchdarkly.com/docs/electron-sdk-reference).
+   * For more information, see the [SDK Reference Guide](http://docs.launchdarkly.com/docs/node-client-sdk-reference).
    */
   export interface LDClient extends LDClientBase {
   }
