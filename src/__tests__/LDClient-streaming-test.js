@@ -1,11 +1,10 @@
-import * as httpServer from './http-server';
-
 import * as LDClient from '../index';
+import * as httpServer from './http-server';
 
 // Unlike the LDClient-streaming-test.js in ldclient-js-common, which tests the client streaming logic
 // against a mock EventSource, this does end-to-end testing against an embedded HTTP server to verify
-// that the EventSource implementation we're using in Electron basically works. Note that the
-// EventSource implementation uses the Node HTTP API directly, not our abstraction in httpRequest.js.
+// that the EventSource implementation we're using in Node basically works. Note that the EventSource
+// implementation uses the Node HTTP API directly, not our abstraction in httpRequest.js.
 
 describe('LDClient streaming', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
