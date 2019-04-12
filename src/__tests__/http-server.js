@@ -58,6 +58,15 @@ export function respondJson(res, data) {
   respond(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify(data));
 }
 
+export function respondSSEEvent(res, eventType, eventData) {
+  respond(
+    res,
+    200,
+    { 'Content-Type': 'text/event-stream' },
+    'event: ' + eventType + '\ndata: ' + JSON.stringify(eventData) + '\n\n'
+  );
+}
+
 export function autoRespond(server, respondFn) {
   server.on('request', (req, res) => respondFn(res));
 }

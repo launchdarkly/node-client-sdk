@@ -17,15 +17,6 @@ describe('LDClient streaming', () => {
     httpServer.closeServers();
   });
 
-  function writeStream(res, flags) {
-    httpServer.respond(
-      res,
-      200,
-      { 'Content-Type': 'text/event-stream' },
-      'event: put\ndata: ' + JSON.stringify(flags) + '\n\n'
-    );
-  }
-
   function eventListenerPromise(emitter, event) {
     return new Promise(resolve => {
       emitter.on(event, resolve);
@@ -33,10 +24,9 @@ describe('LDClient streaming', () => {
   }
 
   it('makes GET request and receives an event', async () => {
+    const eventData = { flag: { value: 'yes', version: 1 } };
     const server = await httpServer.createServer();
-    server.on('request', (req, res) => {
-      writeStream(res, { flag: { value: 'yes', version: 1 } });
-    });
+    httpServer.autoRespond(server, res => httpServer.respondSSEEvent(res, 'put', eventData));
 
     const config = { bootstrap: {}, streaming: true, baseUrl: server.url, streamUrl: server.url, sendEvents: false };
     const client = LDClient.initialize(envName, user, config);
@@ -58,7 +48,7 @@ describe('LDClient streaming', () => {
     server.on('request', (req, res) => {
       httpServer.readAll(req).then(body => {
         receivedBody = body;
-        writeStream(res, { flag: { value: 'yes', version: 1 } });
+        httpServer.respondSSEEvent(res, 'put', { flag: { value: 'yes', version: 1 } });
       });
     });
 
