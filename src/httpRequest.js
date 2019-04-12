@@ -4,15 +4,15 @@
 import http from 'http';
 import https from 'https';
 
-export default function newHttpRequest(options, method, url, headers, body) {
+export default function newHttpRequest(method, url, headers, body, tlsParams) {
   const isHttps = url.match(/^https:/);
 
-  // TODO: options will be used for TLS configuration parameters
-  const requestParams = {
+  const baseParams = {
     method: method,
     headers: headers,
     body: body,
   };
+  const requestParams = isHttps ? Object.assign({}, tlsParams, baseParams) : baseParams;
 
   let request;
   const p = new Promise((resolve, reject) => {
