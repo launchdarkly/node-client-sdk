@@ -1,0 +1,45 @@
+version: 2
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - oldest-long-term-support-release
+      - current-release
+      - audit-dependencies
+
+node-template: &node-template
+  steps:
+    - checkout
+    - run: echo "Node version:" `node --version`
+    - run: npm install
+    - run:
+        command: npm test
+        environment:
+          JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+    - run: npm run check-typescript
+    - store_test_results:
+        path: reports/junit
+    - store_artifacts:
+        path: reports/junit
+
+jobs:
+  oldest-long-term-support-release:
+    <<: *node-template
+    docker:
+      - image: circleci/node:6
+      - image: redis
+
+  current-release:
+    <<: *node-template
+    docker:
+      - image: circleci/node:latest
+      - image: redis
+
+  audit-dependencies:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm audit
