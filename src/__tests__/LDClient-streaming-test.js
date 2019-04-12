@@ -34,9 +34,7 @@ describe('LDClient streaming', () => {
 
   it('makes GET request and receives an event', async () => {
     const server = await httpServer.createServer();
-    const requests = [];
     server.on('request', (req, res) => {
-      requests.push(req);
       writeStream(res, { flag: { value: 'yes', version: 1 } });
     });
 
@@ -49,17 +47,15 @@ describe('LDClient streaming', () => {
     const value = await p;
     expect(value).toEqual('yes');
 
-    expect(requests.length).toEqual(1);
-    expect(requests[0].url).toEqual(expectedGetUrl);
-    expect(requests[0].method).toEqual('GET');
+    expect(server.requests.length).toEqual(1);
+    expect(server.requests[0].url).toEqual(expectedGetUrl);
+    expect(server.requests[0].method).toEqual('GET');
   });
 
   it('makes REPORT request and receives an event', async () => {
     const server = await httpServer.createServer();
-    const requests = [];
     let receivedBody;
     server.on('request', (req, res) => {
-      requests.push(req);
       httpServer.readAll(req).then(body => {
         receivedBody = body;
         writeStream(res, { flag: { value: 'yes', version: 1 } });
@@ -75,9 +71,9 @@ describe('LDClient streaming', () => {
     const value = await p;
     expect(value).toEqual('yes');
 
-    expect(requests.length).toEqual(1);
-    expect(requests[0].url).toEqual(expectedReportUrl);
-    expect(requests[0].method).toEqual('REPORT');
+    expect(server.requests.length).toEqual(1);
+    expect(server.requests[0].url).toEqual(expectedReportUrl);
+    expect(server.requests[0].method).toEqual('REPORT');
     expect(receivedBody).toEqual(JSON.stringify(user));
   });
 });

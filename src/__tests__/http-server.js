@@ -1,17 +1,20 @@
 import * as http from 'http';
+import * as https from 'https';
 
 // This is adapted from some helper code in https://github.com/EventSource/eventsource/blob/master/test/eventsource_test.js
 
 let nextPort = 20000;
 let servers = [];
 
-export function createServer() {
-  const server = http.createServer();
+export function createServer(secure, options) {
+  const server = secure ? https.createServer(options) : http.createServer(options);
   const port = nextPort++;
 
+  server.requests = [];
   const responses = [];
 
   server.on('request', (req, res) => {
+    server.requests.push(req);
     responses.push(res);
   });
 
@@ -21,9 +24,7 @@ export function createServer() {
     realClose.call(server, callback);
   };
 
-  server.closePromise = () => new Promise(resolve => server.close(resolve));
-
-  server.url = 'http://localhost:' + port;
+  server.url = (secure ? 'https' : 'http') + '://localhost:' + port;
 
   servers.push(server);
 
@@ -51,4 +52,12 @@ export function respond(res, status, headers, body) {
   res.writeHead(status, headers);
   body && res.write(body);
   res.end();
+}
+
+export function respondJson(res, data) {
+  respond(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify(data));
+}
+
+export function autoRespond(server, respondFn) {
+  server.on('request', (req, res) => respondFn(res));
 }
