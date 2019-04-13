@@ -31,7 +31,12 @@ var allOptions: LDOptions = {
   samplingInterval: 1,
   streamReconnectDelay: 1,
   logger: logger,
-  localStoragePath: '.'
+  localStoragePath: '.',
+  tlsParams: {
+    ca: 'x',
+    cert: 'y',
+    key: 'z'
+  }
 };
 var user: LDUser = { key: 'user' };
 var client: LDClient = initialize('env', user, allOptions);
