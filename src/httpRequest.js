@@ -1,10 +1,10 @@
 // Node implementation of the HTTP abstraction used by ldclient-js-common.
 // This logic should be the same in the client-side Node SDK as in the Electron SDK.
 
-import http from 'http';
-import https from 'https';
+const http = require('http');
+const https = require('https');
 
-export default function newHttpRequest(method, url, headers, body, tlsParams) {
+function newHttpRequest(method, url, headers, body, tlsParams) {
   const isHttps = url.match(/^https:/);
 
   const baseParams = {
@@ -43,3 +43,5 @@ export default function newHttpRequest(method, url, headers, body, tlsParams) {
 
   return { promise: p, cancel: cancel };
 }
+
+module.exports = newHttpRequest;

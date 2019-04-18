@@ -1,9 +1,9 @@
-import { LocalStorage } from 'node-localstorage';
-import { EventSource } from 'launchdarkly-eventsource';
-import path from 'path';
-import newHttpRequest from './httpRequest';
+const { LocalStorage } = require('node-localstorage');
+const { EventSource } = require('launchdarkly-eventsource');
+const path = require('path');
+const newHttpRequest = require('./httpRequest');
 
-export default function makeNodePlatform(options) {
+function makeNodePlatform(options) {
   const storagePath = path.join(options.localStoragePath || '.', 'ldclient-user-cache');
   const storage = new LocalStorage(storagePath);
   const tlsParams = filterTlsParams(options.tlsParams);
@@ -11,8 +11,6 @@ export default function makeNodePlatform(options) {
   const ret = {};
 
   ret.httpRequest = (method, url, headers, body) => newHttpRequest(method, url, headers, body, tlsParams);
-  // Note that the common code also allows newHttpRequest to take a "synchronous" parameter, but that is only
-  // meaningful in a browser so it's ignored here.
 
   ret.httpAllowsPost = () => true;
 
@@ -65,3 +63,5 @@ function filterTlsParams(tlsParams) {
     .filter(key => httpsOptions.includes(key))
     .reduce((obj, key) => Object.assign({}, obj, { [key]: input[key] }), {});
 }
+
+module.exports = makeNodePlatform;

@@ -1,9 +1,10 @@
-import * as common from 'ldclient-js-common';
-import * as winston from 'winston';
-import nodePlatform from './nodePlatform';
+const common = require('ldclient-js-common');
+const winston = require('winston');
+const nodePlatform = require('./nodePlatform');
+const package = require('../package.json');
 
 // This creates a client-side SDK instance to be used in Node.
-export function initialize(env, user, options = {}) {
+function initialize(env, user, options = {}) {
   // Pass our platform object to the common code to create the Node version of the client
   const platform = nodePlatform(options);
   const extraDefaults = {};
@@ -11,18 +12,11 @@ export function initialize(env, user, options = {}) {
     extraDefaults.logger = createDefaultLogger();
   }
   const clientVars = common.initialize(env, user, options, platform, extraDefaults);
-  const client = clientVars.client;
-
-  client.close = () => clientVars.stop();
 
   clientVars.start();
 
   return clientVars.client;
 }
-
-export const createConsoleLogger = common.createConsoleLogger;
-
-export const version = common.version;
 
 function createDefaultLogger() {
   return new winston.Logger({
@@ -33,4 +27,10 @@ function createDefaultLogger() {
       }),
     ],
   });
+}
+
+module.exports = {
+  initialize: initialize,
+  createConsoleLogger: common.createConsoleLogger,
+  version: package.version
 }
