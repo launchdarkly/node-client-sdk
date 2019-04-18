@@ -66,7 +66,7 @@ declare module 'launchdarkly-node-client-sdk' {
     key?: string | string[] | Buffer | Buffer[] | object[];
     passphrase?: string;
     rejectUnauthorized?: boolean;
-    secureProtocol: string;
+    secureProtocol?: string;
     servername?: string;
   }
 

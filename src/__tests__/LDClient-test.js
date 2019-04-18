@@ -5,15 +5,10 @@ describe('LDClient', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
   const user = { key: 'user' };
   let server;
-  let requests;
 
   beforeEach(async () => {
     server = await httpServer.createServer();
-    server.on('request', (req, res) => {
-      requests.push(req);
-      httpServer.respond(res, 200, { 'Content-Type': 'application/json' }, '{}');
-    });
-    requests = [];
+    httpServer.autoRespond(server, res => httpServer.respondJson(res, {}));
   });
 
   afterEach(() => {
@@ -34,8 +29,8 @@ describe('LDClient', () => {
       const client = LDClient.initialize(envName, user, { baseUrl: server.url });
       await client.waitForInitialization();
 
-      expect(requests.length).toEqual(1);
-      expect(requests[0].headers['x-launchdarkly-user-agent']).toMatch(/^NodeClientSide\//);
+      expect(server.requests.length).toEqual(1);
+      expect(server.requests[0].headers['x-launchdarkly-user-agent']).toMatch(/^NodeClientSide\//);
     });
   });
 

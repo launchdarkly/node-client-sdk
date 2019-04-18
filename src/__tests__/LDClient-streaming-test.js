@@ -17,15 +17,6 @@ describe('LDClient streaming', () => {
     httpServer.closeServers();
   });
 
-  function writeStream(res, flags) {
-    httpServer.respond(
-      res,
-      200,
-      { 'Content-Type': 'text/event-stream' },
-      'event: put\ndata: ' + JSON.stringify(flags) + '\n\n'
-    );
-  }
-
   function eventListenerPromise(emitter, event) {
     return new Promise(resolve => {
       emitter.on(event, resolve);
@@ -33,12 +24,9 @@ describe('LDClient streaming', () => {
   }
 
   it('makes GET request and receives an event', async () => {
+    const eventData = { flag: { value: 'yes', version: 1 } };
     const server = await httpServer.createServer();
-    const requests = [];
-    server.on('request', (req, res) => {
-      requests.push(req);
-      writeStream(res, { flag: { value: 'yes', version: 1 } });
-    });
+    httpServer.autoRespond(server, res => httpServer.respondSSEEvent(res, 'put', eventData));
 
     const config = { bootstrap: {}, streaming: true, baseUrl: server.url, streamUrl: server.url, sendEvents: false };
     const client = LDClient.initialize(envName, user, config);
@@ -49,20 +37,18 @@ describe('LDClient streaming', () => {
     const value = await p;
     expect(value).toEqual('yes');
 
-    expect(requests.length).toEqual(1);
-    expect(requests[0].url).toEqual(expectedGetUrl);
-    expect(requests[0].method).toEqual('GET');
+    expect(server.requests.length).toEqual(1);
+    expect(server.requests[0].url).toEqual(expectedGetUrl);
+    expect(server.requests[0].method).toEqual('GET');
   });
 
   it('makes REPORT request and receives an event', async () => {
     const server = await httpServer.createServer();
-    const requests = [];
     let receivedBody;
     server.on('request', (req, res) => {
-      requests.push(req);
       httpServer.readAll(req).then(body => {
         receivedBody = body;
-        writeStream(res, { flag: { value: 'yes', version: 1 } });
+        httpServer.respondSSEEvent(res, 'put', { flag: { value: 'yes', version: 1 } });
       });
     });
 
@@ -75,9 +61,9 @@ describe('LDClient streaming', () => {
     const value = await p;
     expect(value).toEqual('yes');
 
-    expect(requests.length).toEqual(1);
-    expect(requests[0].url).toEqual(expectedReportUrl);
-    expect(requests[0].method).toEqual('REPORT');
+    expect(server.requests.length).toEqual(1);
+    expect(server.requests[0].url).toEqual(expectedReportUrl);
+    expect(server.requests[0].method).toEqual('REPORT');
     expect(receivedBody).toEqual(JSON.stringify(user));
   });
 });
