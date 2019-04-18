@@ -9,13 +9,8 @@
     "analytics",
     "client"
   ],
-  "files": [
-    "launchdarkly-node-client-sdk.js",
-    "launchdarkly-node-client-sdk.js.map",
-    "typings.d.ts"
-  ],
   "types": "./typings.d.ts",
-  "main": "dist/launchdarkly-node-client-sdk.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint --format 'node_modules/eslint-formatter-pretty' --ignore-path .eslintignore",
     "lint:all": "eslint --format 'node_modules/eslint-formatter-pretty' --ignore-path .eslintignore src",
