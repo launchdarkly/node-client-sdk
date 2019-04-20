@@ -24,7 +24,7 @@ function newHttpRequest(method, url, headers, body, tlsParams) {
       res.on('end', () => {
         resolve({
           status: res.statusCode,
-          headers: res.headers, // note that the Node HTTP API will lowercase these for us
+          header: name => res.headers[name.toLowerCase()], // note that the Node HTTP API will lowercase these for us
           body: resBody,
         });
       });

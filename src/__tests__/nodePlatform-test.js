@@ -74,7 +74,7 @@ describe('nodePlatform', () => {
 
       const result = await requestInfo.promise;
       expect(result.status).toEqual(200);
-      expect(result.headers['content-type']).toEqual('text/plain');
+      expect(result.header('content-type')).toEqual('text/plain');
       expect(result.body).toEqual('hello');
     });
 

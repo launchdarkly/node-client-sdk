@@ -3,6 +3,13 @@ import * as selfsigned from 'selfsigned';
 import * as LDClient from '../index';
 import * as httpServer from './http-server';
 
+const stubLogger = {
+  debug: jest.fn(),
+  info: jest.fn(),
+  warn: jest.fn(),
+  error: jest.fn(),
+};
+
 describe('LDClient TLS configuration', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
   const user = { key: 'user' };
@@ -49,6 +56,7 @@ describe('LDClient TLS configuration', () => {
     const config = {
       baseUrl: server.url,
       sendEvents: false,
+      logger: stubLogger,
     };
     const client = LDClient.initialize(envName, user, config);
     await expect(client.waitForInitialization()).rejects.toThrow(/network error.*self signed/);
