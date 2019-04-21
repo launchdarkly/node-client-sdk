@@ -1,7 +1,6 @@
 const common = require('ldclient-js-common');
 const winston = require('winston');
 const nodePlatform = require('./nodePlatform');
-const packageJson = require('../package.json');
 
 // This creates a client-side SDK instance to be used in Node.
 function initialize(env, user, options = {}) {
@@ -32,5 +31,5 @@ function createDefaultLogger() {
 module.exports = {
   initialize: initialize,
   createConsoleLogger: common.createConsoleLogger,
-  version: packageJson.version
+  version: VERSION
 };
