@@ -6,9 +6,9 @@ import * as https from 'https';
 let nextPort = 20000;
 let servers = [];
 
-export function createServer(secure, options) {
+export async function createServer(secure, options) {
   const server = secure ? https.createServer(options) : http.createServer(options);
-  const port = nextPort++;
+  let port = nextPort++;
 
   server.requests = [];
   const responses = [];
@@ -24,13 +24,24 @@ export function createServer(secure, options) {
     realClose.call(server, callback);
   };
 
-  server.url = (secure ? 'https' : 'http') + '://localhost:' + port;
-
   servers.push(server);
 
-  return new Promise((resolve, reject) => {
-    server.listen(port, err => (err ? reject(err) : resolve(server)));
-  });
+  while (true) {
+    const p = new Promise((resolve, reject) => {
+      server.listen(port, err => (err ? reject(err) : resolve(server)));
+    });
+    try {
+      await p;
+      server.url = (secure ? 'https' : 'http') + '://localhost:' + port;
+      return server;
+    } catch (err) {
+      if (err.message.match(/EADDRINUSE/)) {
+        port = nextPort++;
+      } else {
+        throw err;
+      }
+    }
+  }
 }
 
 export function closeServers() {

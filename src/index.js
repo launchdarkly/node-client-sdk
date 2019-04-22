@@ -30,5 +30,5 @@ function createDefaultLogger() {
 
 module.exports = {
   initialize: initialize,
-  createConsoleLogger: common.createConsoleLogger
+  createConsoleLogger: common.createConsoleLogger,
 };

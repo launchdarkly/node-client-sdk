@@ -26,4 +26,10 @@ npm install
 
 npm publish
 
+if [[ $VERSION =~ '-' ]]; then
+	echo "Not publishing documentation because this is not a production release"
+else
+  ./scripts/release-docs.sh
+fi
+
 echo "Done with node-client-sdk release."
