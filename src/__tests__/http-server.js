@@ -35,7 +35,7 @@ export async function createServer(secure, options) {
       server.url = (secure ? 'https' : 'http') + '://localhost:' + port;
       return server;
     } catch (err) {
-      if (err.message.match(/EADDRINUSE/)) {
+      if (String(err).match(/EADDRINUSE/)) {
         port = nextPort++;
       } else {
         throw err;
