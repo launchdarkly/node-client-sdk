@@ -4,9 +4,17 @@ const path = require('path');
 const newHttpRequest = require('./httpRequest');
 
 function makeNodePlatform(options) {
-  const storagePath = path.join(options.localStoragePath || '.', 'ldclient-user-cache');
-  const storage = new LocalStorage(storagePath);
   const tlsParams = filterTlsParams(options.tlsParams);
+
+  // Don't initialize local storage unless it's used, because it'll create a directory
+  const storagePath = path.join(options.localStoragePath || '.', 'ldclient-user-cache');
+  let storage;
+  function getLocalStorage() {
+    if (!storage) {
+      storage = new LocalStorage(storagePath);
+    }
+    return storage;
+  } 
 
   const ret = {};
 
@@ -21,16 +29,16 @@ function makeNodePlatform(options) {
   ret.localStorage = {
     get: key =>
       new Promise(resolve => {
-        resolve(storage.getItem(key));
+        resolve(getLocalStorage().getItem(key));
       }),
     set: (key, value) =>
       new Promise(resolve => {
-        storage.setItem(key, value);
+        getLocalStorage().setItem(key, value);
         resolve();
       }),
     clear: key =>
       new Promise(resolve => {
-        storage.removeItem(key);
+        getLocalStorage().removeItem(key);
         resolve();
       }),
   };
