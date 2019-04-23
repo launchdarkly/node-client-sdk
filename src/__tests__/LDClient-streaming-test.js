@@ -1,5 +1,5 @@
-import * as LDClient from '../index';
-import * as httpServer from './http-server';
+const LDClient = require('../index');
+const httpServer = require('./http-server');
 
 // Unlike the LDClient-streaming-test.js in ldclient-js-common, which tests the client streaming logic
 // against a mock EventSource, this does end-to-end testing against an embedded HTTP server to verify

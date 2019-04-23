@@ -1,5 +1,6 @@
-import nodePlatform from '../nodePlatform';
-import * as httpServer from './http-server';
+const nodePlatform = require('../nodePlatform');
+
+const httpServer = require('./http-server');
 
 describe('nodePlatform', () => {
   const platform = nodePlatform({});

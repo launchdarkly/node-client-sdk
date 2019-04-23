@@ -1,5 +1,5 @@
-import * as LDClient from '../index';
-import * as httpServer from './http-server';
+const LDClient = require('../index');
+const httpServer = require('./http-server');
 
 describe('LDClient', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';

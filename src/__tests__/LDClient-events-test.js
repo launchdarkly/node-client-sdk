@@ -1,4 +1,4 @@
-import * as LDClient from '../index';
+const LDClient = require('../index');
 
 describe('LDClient', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';

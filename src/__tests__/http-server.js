@@ -1,5 +1,5 @@
-import * as http from 'http';
-import * as https from 'https';
+const http = require('http');
+const https = require('https');
 
 // This is adapted from some helper code in https://github.com/EventSource/eventsource/blob/master/test/eventsource_test.js
 

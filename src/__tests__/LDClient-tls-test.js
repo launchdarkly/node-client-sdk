@@ -1,7 +1,7 @@
-import * as selfsigned from 'selfsigned';
+const selfsigned = require('selfsigned');
 
-import * as LDClient from '../index';
-import * as httpServer from './http-server';
+const LDClient = require('../index');
+const httpServer = require('./http-server');
 
 const stubLogger = {
   debug: jest.fn(),
