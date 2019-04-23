@@ -1,6 +1,6 @@
 {
   "name": "launchdarkly-node-client-sdk",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.2",
   "description": "LaunchDarkly Client-Side SDK for Node.js",
   "author": "LaunchDarkly <team@launchdarkly.com>",
   "license": "Apache-2.0",
@@ -16,8 +16,7 @@
     "lint:all": "eslint --format 'node_modules/eslint-formatter-pretty' --ignore-path .eslintignore src",
     "test": "NODE_ENV=test jest",
     "test:junit": "NODE_ENV=test jest --testResultsProcessor jest-junit",
-    "check-typescript": "node_modules/typescript/bin/tsc",
-    "prepublishOnly": "npm run build:min"
+    "check-typescript": "node_modules/typescript/bin/tsc"
   },
   "devDependencies": {
     "@babel/core": "7.4.3",
