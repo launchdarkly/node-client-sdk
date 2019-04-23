@@ -3,7 +3,7 @@ import * as https from 'https';
 
 // This is adapted from some helper code in https://github.com/EventSource/eventsource/blob/master/test/eventsource_test.js
 
-let nextPort = 20000;
+let nextPort = 8000;
 let servers = [];
 
 export async function createServer(secure, options) {
@@ -27,15 +27,16 @@ export async function createServer(secure, options) {
   servers.push(server);
 
   while (true) {
-    const p = new Promise((resolve, reject) => {
-      server.listen(port, err => (err ? reject(err) : resolve(server)));
-    });
     try {
-      await p;
+      await new Promise((resolve, reject) => {
+        server.listen(port);
+        server.on('error', reject);
+        server.on('listening', resolve);
+      });
       server.url = (secure ? 'https' : 'http') + '://localhost:' + port;
       return server;
     } catch (err) {
-      if (String(err).match(/EADDRINUSE/)) {
+      if (err.message.match(/EADDRINUSE/)) {
         port = nextPort++;
       } else {
         throw err;
