@@ -3,20 +3,18 @@
 
 const http = require('http');
 const https = require('https');
+const url = require('url');
 
-function newHttpRequest(method, url, headers, body, tlsParams) {
-  const isHttps = url.match(/^https:/);
+function newHttpRequest(method, requestUrl, headers, body, tlsParams) {
+  const urlParams = url.parse(requestUrl);
+  const isHttps = urlParams.protocol === 'https:';
 
-  const baseParams = {
-    method: method,
-    headers: headers,
-    body: body,
-  };
-  const requestParams = isHttps ? Object.assign({}, tlsParams, baseParams) : baseParams;
+  const requestParams = Object.assign({}, isHttps ? tlsParams : {}, urlParams,
+    { method: method, headers: headers, body: body });
 
   let request;
   const p = new Promise((resolve, reject) => {
-    request = (isHttps ? https : http).request(url, requestParams, res => {
+    request = (isHttps ? https : http).request(requestParams, res => {
       let resBody = '';
       res.on('data', chunk => {
         resBody += chunk;
