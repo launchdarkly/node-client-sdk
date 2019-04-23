@@ -52,8 +52,9 @@ declare module 'launchdarkly-node-client-sdk' {
   }
 
   /**
-   * Additional parameters to pass to the Node HTTPS API for secure requests.  These can include any
+   * Additional parameters to pass to the Node HTTPS API for secure requests. These can include any
    * of the TLS-related parameters supported by `https.request()`, such as `ca`, `cert`, and `key`.
+   * This object should be stored in the `tlsParams` property of [[LDOptions]].
    * 
    * For more information, see the Node documentation for `https.request()` and `tls.connect()`.
    */
