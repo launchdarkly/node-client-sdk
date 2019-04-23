@@ -2,6 +2,10 @@
 
 [![Circle CI](https://circleci.com/gh/launchdarkly/node-client-sdk.svg?style=svg)](https://circleci.com/gh/launchdarkly/node-client-sdk)
 
+# This is a beta release
+
+This SDK should not be used in production environments until a final version is released.
+
 ## LaunchDarkly overview
 
 [LaunchDarkly](https://www.launchdarkly.com) is a feature management platform that serves over 100 billion feature flags daily to help teams build better software, faster. [Get started](https://docs.launchdarkly.com/docs/getting-started) using LaunchDarkly today!
@@ -10,7 +14,7 @@
 
 ## Introduction
 
-This is the official LaunchDarkly JavaScript SDK for client-side [Node.js](https://nodejs.org/) applications. Its API closely resembles the LaunchDarkly [JavaScript SDK for browsers](https://github.com/launchdarkly/js-client), so many of its types and interfaces are specified in that project's [TypeScript definitions](https://github.com/launchdarkly/js-client/tree/master/packages/ldclient-js-common/typings.d.ts).
+This is the official LaunchDarkly JavaScript SDK for client-side [Node.js](https://nodejs.org/) applications. Its API closely resembles the LaunchDarkly [JavaScript SDK for browsers](https://github.com/launchdarkly/js-client), minus a few browser-specific features.
 
 The SDK provides the same functionality as all of the LaunchDarkly SDKs:
 
@@ -23,7 +27,7 @@ Note that in order for LaunchDarkly to make your feature flags available to thes
 
 ## Why use this instead of the server-side Node SDK?
 
-The [LaunchDarkly Server-Side Node SDK](https://github.com/launchdarkly/node-server-sdk) also runs in Node and has a similar API. However, it is meant for server-side use, not for applications that are distributed to users. There are several reasons why this distinction matters:
+The [LaunchDarkly Server-Side Node SDK](https://github.com/launchdarkly/node-client) also runs in Node and has a similar API. However, it is meant for server-side use, not for applications that are distributed to users. There are several reasons why this distinction matters:
 
 - The server-side SDKs include an SDK key that can download the entire definition (including rollout rules and individual user targets) of all of your feature flags. If you embed this SDK key in an application, any user who looks inside the application can then access all of your feature flag definitions—which may include sensitive data such as other users' email addresses. The client-side and mobile SDKs use different credentials that do not allow this.
 
@@ -183,9 +187,7 @@ By default, the SDK uses the `winston` package. There are four logging levels: `
 
 ## Learn more
 
-Check out our [documentation](https://docs.launchdarkly.com) for in-depth instructions on configuring and using LaunchDarkly. You can also head straight to the [complete reference guide for this SDK](https://docs.launchdarkly.com/docs/node-client-sdk-reference). The authoritative description of all properties and methods is in the TypeScript declaration files [here](typings.d.ts) and [here](https://github.com/launchdarkly/js-client/tree/master/packages/ldclient-js-common/typings.d.ts).
-
-For an example of using the SDK in a simple Node application, see [`hello-node-client`](https://github.com/launchdarkly/hello-node-client).
+Check out our [documentation](https://docs.launchdarkly.com) for in-depth instructions on configuring and using LaunchDarkly. You can also head straight to the [complete reference guide for this SDK](https://docs.launchdarkly.com/docs/node-client-sdk-reference). The authoritative description of all properties and methods is in the [TypeScript documentation](https://launchdarkly.github.io/node-client-sdk/).
 
 ## Testing
  

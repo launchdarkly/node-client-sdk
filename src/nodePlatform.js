@@ -14,7 +14,7 @@ function makeNodePlatform(options) {
       storage = new LocalStorage(storagePath);
     }
     return storage;
-  } 
+  }
 
   const ret = {};
 
