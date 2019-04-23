@@ -9,8 +9,11 @@ function newHttpRequest(method, requestUrl, headers, body, tlsParams) {
   const urlParams = url.parse(requestUrl);
   const isHttps = urlParams.protocol === 'https:';
 
-  const requestParams = Object.assign({}, isHttps ? tlsParams : {}, urlParams,
-    { method: method, headers: headers, body: body });
+  const requestParams = Object.assign({}, isHttps ? tlsParams : {}, urlParams, {
+    method: method,
+    headers: headers,
+    body: body,
+  });
 
   let request;
   const p = new Promise((resolve, reject) => {
