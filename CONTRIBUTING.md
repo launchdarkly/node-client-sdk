@@ -18,13 +18,12 @@ The project uses `npm`, which is bundled in all supported versions of Node.
 
 Note that much of the basic SDK logic, which is common to all of the LaunchDarkly client-side JavaScript-based SDKs, is in the `ldclient-js-common` package within [js-client](https://github.com/launchdarkly/js-client). This is pulled in automatically by `npm` when you build the SDK, but if you are planning to make changes that affect the common code, you will need to check out that repository as well.
 
-### Building
+### Setup
 
-To build, from the project root directory:
+To install project dependencies, from the project root directory:
 
 ```
 npm install
-npm run build
 ```
 
 ### Testing
