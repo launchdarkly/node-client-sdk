@@ -9,7 +9,7 @@
 declare module 'launchdarkly-node-client-sdk' {
 
 //// DOCBUILD-START-REPLACE  (see docs/Makefile)
-  export * from 'ldclient-js-common';
+  export * from 'launchdarkly-js-sdk-common';
 
   import {
     LDEvaluationDetail,
@@ -19,7 +19,7 @@ declare module 'launchdarkly-node-client-sdk' {
     LDClientBase,
     LDOptionsBase,
     LDUser
-  } from 'ldclient-js-common';
+  } from 'launchdarkly-js-sdk-common';
 //// DOCBUILD-END-REPLACE
 
   /**
