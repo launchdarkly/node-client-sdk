@@ -1,8 +1,8 @@
-# LaunchDarkly Client-side SDK for Node.js
+# LaunchDarkly Client-Side SDK for Node.js
 
 [![Circle CI](https://circleci.com/gh/launchdarkly/node-client-sdk.svg?style=svg)](https://circleci.com/gh/launchdarkly/node-client-sdk)
 
-The LaunchDarkly Client-side SDK for Node.js is designed primarily for use by code that is deployed to an end user, such as in a desktop application or a smart device. It follows the client-side LaunchDarkly model for single-user contexts (much like our mobile or JavaScript SDKs). It is not intended for use in multi-user systems such as web servers and applications.
+The LaunchDarkly Client-Side SDK for Node.js is designed primarily for use by code that is deployed to an end user, such as in a desktop application or a smart device. It follows the client-side LaunchDarkly model for single-user contexts (much like our mobile or JavaScript SDKs). It is not intended for use in multi-user systems such as web servers and applications.
 
 For using LaunchDarkly in *server-side* Node.js applications, refer to our [Server-side Node.js SDK](https://github.com/launchdarkly/node-server-sdk).
 

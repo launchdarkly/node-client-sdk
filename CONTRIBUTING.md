@@ -1,4 +1,4 @@
-# Contributing to the LaunchDarkly Client-side SDK for Node.js
+# Contributing to the LaunchDarkly Client-Side SDK for Node.js
 
 LaunchDarkly has published an [SDK contributor's guide](https://docs.launchdarkly.com/docs/sdk-contributors-guide) that provides a detailed explanation of how our SDKs work. See below for additional information on how to contribute to this SDK.
 
