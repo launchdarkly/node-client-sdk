@@ -11,7 +11,7 @@ For using LaunchDarkly in *server-side* Node.js applications, refer to our [Serv
 ## LaunchDarkly overview
 
 [LaunchDarkly](https://www.launchdarkly.com) is a feature management platform that serves over 100 billion feature flags daily to help teams build better software, faster. [Get started](https://docs.launchdarkly.com/docs/getting-started) using LaunchDarkly today!
- 
+
 [![Twitter Follow](https://img.shields.io/twitter/follow/launchdarkly.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/intent/follow?screen_name=launchdarkly)
 
 ## Supported Node versions
@@ -19,25 +19,25 @@ For using LaunchDarkly in *server-side* Node.js applications, refer to our [Serv
 This version of the LaunchDarkly SDK has been tested with Node 6.14 and up.
 
 ## Getting started
- 
+
 Refer to the [SDK documentation](https://docs.launchdarkly.com/docs/node-client-sdk-reference#section-getting-started) for instructions on getting started with using the SDK.
 
 ## Learn more
- 
+
 Check out our [documentation](https://docs.launchdarkly.com) for in-depth instructions on configuring and using LaunchDarkly. You can also head straight to the [complete reference guide for this SDK](https://docs.launchdarkly.com/docs/node-client-sdk-reference).
 
 The authoritative description of all properties and methods is in the [TypeScript documentation](https://launchdarkly.github.io/node-client-sdk/).
- 
+
 ## Testing
- 
+
 We run integration tests for all our SDKs using a centralized test harness. This approach gives us the ability to test for consistency across SDKs, as well as test networking behavior in a long-running application. These tests cover each method in the SDK, and verify that event sending, flag evaluation, stream reconnection, and other aspects of the SDK all behave correctly.
- 
+
 ## Contributing
- 
+
 We encourage pull requests and other contributions from the community. Check out our [contributing guidelines](CONTRIBUTING.md) for instructions on how to contribute to this SDK.
- 
+
 ## About LaunchDarkly
- 
+
 * LaunchDarkly is a continuous delivery platform that provides feature flags as a service and allows developers to iterate quickly and safely. We allow you to easily flag your features and manage them from the LaunchDarkly dashboard.  With LaunchDarkly, you can:
     * Roll out a new feature to a subset of your users (like a group of users who opt-in to a beta tester group), gathering feedback and bug reports from real-world use cases.
     * Gradually roll out a feature to an increasing percentage of users, and track the effect that the feature has on key metrics (for instance, how likely is a user to complete a purchase if they have feature A versus feature B?).
