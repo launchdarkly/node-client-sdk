@@ -29,6 +29,9 @@ declare module 'launchdarkly-node-client-sdk' {
    *   The LaunchDarkly environment ID.
    * @param user
    *   The initial user properties. These can be changed later with [[LDClient.identify]].
+   *   The user must have a `key` property, except that if you omit `user.key` and set `user.anonymous` to
+   *   true, the SDK will create a randomized unique key (which will be cached in local storage for the
+   *   current OS user account, so the next initialization will reuse the same key).
    * @param options
    *   Optional configuration settings.
    */
