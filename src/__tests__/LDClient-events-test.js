@@ -4,7 +4,7 @@ describe('LDClient', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
   const user = { key: 'user' };
 
-  // Event generation in general is tested in a non-platform-specific way in ldclient-js-common.
+  // Event generation in general is tested in a non-platform-specific way in launchdarkly-js-sdk-common.
   // The following tests just demonstrate that the common client calls our platform object when it
   // should.
 

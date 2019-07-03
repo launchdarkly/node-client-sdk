@@ -1,4 +1,4 @@
-const common = require('ldclient-js-common');
+const common = require('launchdarkly-js-sdk-common');
 const winston = require('winston');
 const nodePlatform = require('./nodePlatform');
 

@@ -9,7 +9,7 @@
 declare module 'launchdarkly-node-client-sdk' {
 
 //// DOCBUILD-START-REPLACE  (see docs/Makefile)
-  export * from 'ldclient-js-common';
+  export * from 'launchdarkly-js-sdk-common';
 
   import {
     LDEvaluationDetail,
@@ -19,7 +19,7 @@ declare module 'launchdarkly-node-client-sdk' {
     LDClientBase,
     LDOptionsBase,
     LDUser
-  } from 'ldclient-js-common';
+  } from 'launchdarkly-js-sdk-common';
 //// DOCBUILD-END-REPLACE
 
   /**
@@ -29,6 +29,9 @@ declare module 'launchdarkly-node-client-sdk' {
    *   The LaunchDarkly environment ID.
    * @param user
    *   The initial user properties. These can be changed later with [[LDClient.identify]].
+   *   The user must have a `key` property, except that if you omit `user.key` and set `user.anonymous` to
+   *   true, the SDK will create a randomized unique key (which will be cached in local storage for the
+   *   current OS user account, so the next initialization will reuse the same key).
    * @param options
    *   Optional configuration settings.
    */

@@ -1,4 +1,4 @@
-// Node implementation of the HTTP abstraction used by ldclient-js-common.
+// Node implementation of the HTTP abstraction used by launchdarkly-js-sdk-common.
 // This logic should be the same in the client-side Node SDK as in the Electron SDK.
 
 const http = require('http');
