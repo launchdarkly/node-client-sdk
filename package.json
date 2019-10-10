@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "launchdarkly-eventsource": "1.0.0",
-    "launchdarkly-js-sdk-common": "2.12.2",
+    "launchdarkly-js-sdk-common": "2.14.0",
     "node-localstorage": "^1.3.1",
     "original": "^1.0.0",
     "winston": "^2.4.1"
