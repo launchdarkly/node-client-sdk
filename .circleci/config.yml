@@ -11,12 +11,22 @@ node-template: &node-template
   steps:
     - checkout
     - run: echo "Node version:" `node --version`
+    
     - run: npm install
+
+    - run: npm run lint:all
+
     - run:
         command: npm test
         environment:
           JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+
     - run: npm run check-typescript
+
+    - run:
+        name: dependency audit
+        command: ./scripts/better-audit.sh
+
     - store_test_results:
         path: reports/junit
     - store_artifacts:
