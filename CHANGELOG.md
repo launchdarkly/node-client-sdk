@@ -2,6 +2,11 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.2.1] - 2019-11-06
+### Fixed:
+- A runtime dependency on `typedoc` was mistakenly added in the 1.2.0 release. This has been removed.
+
+
 ## [1.2.0] - 2019-11-05
 ### Changed:
 - Changed the behavior of the warning message that is logged on failing to establish a streaming connection. Rather than the current behavior where the warning message appears upon each failed attempt, it will now only appear on the first failure in each series of attempts. Also, the message has been changed to mention that retries will occur.
