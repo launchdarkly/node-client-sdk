@@ -21,6 +21,7 @@
   "devDependencies": {
     "@babel/core": "7.4.3",
     "@babel/preset-env": "7.4.3",
+    "@types/node": "12.12.6",
     "babel-eslint": "10.0.1",
     "babel-jest": "24.7.1",
     "chai": "4.1.2",
