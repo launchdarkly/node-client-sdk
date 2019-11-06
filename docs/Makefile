@@ -17,6 +17,7 @@ html: prepare
 	../node_modules/.bin/typedoc --options typedoc.js
 
 prepare:
+	cd .. && npm install typedoc
 	rm -rf build
 	mkdir build
 	@# Extract the whole module declaration from launchdarkly-js-sdk-common, then remove the first and last lines

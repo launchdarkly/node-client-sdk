@@ -21,6 +21,7 @@
   "devDependencies": {
     "@babel/core": "7.4.3",
     "@babel/preset-env": "7.4.3",
+    "@types/node": "12.12.6",
     "babel-eslint": "10.0.1",
     "babel-jest": "24.7.1",
     "chai": "4.1.2",
@@ -39,12 +40,11 @@
     "selfsigned": "1.10.4",
     "semver": "5.5.0",
     "semver-compare": "1.0.0",
-    "typedoc": "0.14.2",
     "typescript": "3.0.1"
   },
   "dependencies": {
     "launchdarkly-eventsource": "1.0.0",
-    "launchdarkly-js-sdk-common": "2.14.0",
+    "launchdarkly-js-sdk-common": "2.14.1",
     "node-localstorage": "^1.3.1",
     "original": "^1.0.0",
     "winston": "^2.4.1"
