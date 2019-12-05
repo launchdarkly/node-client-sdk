@@ -1,4 +1,5 @@
 const LDClient = require('../index');
+import * as packageJson from '../../package.json';
 
 const { TestHttpHandlers, TestHttpServers, withCloseable } = require('launchdarkly-js-test-helpers');
 
@@ -8,6 +9,10 @@ describe('LDClient', () => {
 
   it('should exist', () => {
     expect(LDClient).toBeDefined();
+  });
+
+  it('should report correct version', () => {
+    expect(LDClient.version).toEqual(packageJson.version);
   });
 
   describe('initialization', () => {
