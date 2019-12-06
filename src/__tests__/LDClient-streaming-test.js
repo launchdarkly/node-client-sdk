@@ -1,5 +1,12 @@
 const LDClient = require('../index');
-const httpServer = require('./http-server');
+
+const {
+  AsyncQueue,
+  TestHttpHandlers,
+  TestHttpServers,
+  eventSink,
+  withCloseable,
+} = require('launchdarkly-js-test-helpers');
 
 // Unlike the LDClient-streaming-test.js in launchdarkly-js-sdk-common, which tests the client streaming logic
 // against a mock EventSource, this does end-to-end testing against an embedded HTTP server to verify
@@ -13,57 +20,60 @@ describe('LDClient streaming', () => {
   const expectedGetUrl = '/eval/' + envName + '/' + encodedUser;
   const expectedReportUrl = '/eval/' + envName;
 
-  afterEach(() => {
-    httpServer.closeServers();
-  });
-
-  function eventListenerPromise(emitter, event) {
-    return new Promise(resolve => {
-      emitter.on(event, resolve);
-    });
-  }
-
   it('makes GET request and receives an event', async () => {
-    const eventData = { flag: { value: 'yes', version: 1 } };
-    const server = await httpServer.createServer();
-    httpServer.autoRespond(server, res => httpServer.respondSSEEvent(res, 'put', eventData));
+    await withCloseable(TestHttpServers.start, async server => {
+      await withCloseable(new AsyncQueue(), async eventQueue => {
+        const eventData = { flag: { value: 'yes', version: 1 } };
+        eventQueue.add({ type: 'put', data: JSON.stringify(eventData) });
+        server.forMethodAndPath('get', expectedGetUrl, TestHttpHandlers.sseStream(eventQueue));
 
-    const config = { bootstrap: {}, streaming: true, baseUrl: server.url, streamUrl: server.url, sendEvents: false };
-    const client = LDClient.initialize(envName, user, config);
+        const config = {
+          bootstrap: {},
+          streaming: true,
+          baseUrl: server.url,
+          streamUrl: server.url,
+          sendEvents: false,
+        };
+        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+          const changeEvents = eventSink(client, 'change:flag');
+          await client.waitForInitialization();
 
-    const p = eventListenerPromise(client, 'change:flag');
-    await client.waitForInitialization();
+          const value = await changeEvents.take();
+          expect(value).toEqual(['yes', undefined]); // second parameter to change event is old value
 
-    const value = await p;
-    expect(value).toEqual('yes');
-
-    expect(server.requests.length).toEqual(1);
-    expect(server.requests[0].url).toEqual(expectedGetUrl);
-    expect(server.requests[0].method).toEqual('GET');
+          expect(server.requestCount()).toEqual(1);
+        });
+      });
+    });
   });
 
   it('makes REPORT request and receives an event', async () => {
-    const server = await httpServer.createServer();
-    let receivedBody;
-    server.on('request', (req, res) => {
-      httpServer.readAll(req).then(body => {
-        receivedBody = body;
-        httpServer.respondSSEEvent(res, 'put', { flag: { value: 'yes', version: 1 } });
+    await withCloseable(TestHttpServers.start, async server => {
+      await withCloseable(new AsyncQueue(), async eventQueue => {
+        const eventData = { flag: { value: 'yes', version: 1 } };
+        eventQueue.add({ type: 'put', data: JSON.stringify(eventData) });
+        server.forMethodAndPath('report', expectedReportUrl, TestHttpHandlers.sseStream(eventQueue));
+
+        const config = {
+          bootstrap: {},
+          streaming: true,
+          baseUrl: server.url,
+          streamUrl: server.url,
+          sendEvents: false,
+          useReport: true,
+        };
+        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+          const changeEvents = eventSink(client, 'change:flag');
+          await client.waitForInitialization();
+
+          const value = await changeEvents.take();
+          expect(value).toEqual(['yes', undefined]); // second parameter to change event is old value
+
+          expect(server.requestCount()).toEqual(1);
+          const req = await server.nextRequest();
+          expect(req.body).toEqual(JSON.stringify(user));
+        });
       });
     });
-
-    const config = { bootstrap: {}, streaming: true, streamUrl: server.url, sendEvents: false, useReport: true };
-    const client = LDClient.initialize(envName, user, config);
-
-    const p = eventListenerPromise(client, 'change:flag');
-    await client.waitForInitialization();
-
-    const value = await p;
-    expect(value).toEqual('yes');
-
-    expect(server.requests.length).toEqual(1);
-    expect(server.requests[0].url).toEqual(expectedReportUrl);
-    expect(server.requests[0].method).toEqual('REPORT');
-    expect(receivedBody).toEqual(JSON.stringify(user));
   });
 });

@@ -1,6 +1,6 @@
 const nodePlatform = require('../nodePlatform');
 
-const httpServer = require('./http-server');
+const { TestHttpHandlers, TestHttpServers, withCloseable } = require('launchdarkly-js-test-helpers');
 
 describe('nodePlatform', () => {
   const platform = nodePlatform({});
@@ -9,80 +9,68 @@ describe('nodePlatform', () => {
   describe('httpRequest()', () => {
     const path = '/path';
 
-    afterEach(() => {
-      httpServer.closeServers();
-    });
-
     it('tells the SDK it can support POST', () => {
       expect(platform.httpAllowsPost()).toBe(true);
     });
 
     it('sets request properties without body', async () => {
-      const server = await httpServer.createServer();
-      const requests = [];
-      server.on('request', (req, res) => {
-        requests.push(req);
-        httpServer.respond(res, 200);
+      await withCloseable(TestHttpServers.start, async server => {
+        const method = 'get';
+        server.forMethodAndPath(method, path, TestHttpHandlers.respond(200));
+
+        const headers = { a: '1', b: '2' };
+        await platform.httpRequest(method, server.url + path, headers).promise;
+
+        expect(server.requestCount()).toEqual(1);
+        const req = await server.nextRequest();
+
+        expect(req.method).toEqual(method);
+        expect(req.path).toEqual(path);
+        expect(req.headers['a']).toEqual('1');
+        expect(req.headers['b']).toEqual('2');
       });
-
-      const method = 'GET';
-      const headers = { a: '1', b: '2' };
-      await platform.httpRequest(method, server.url + path, headers).promise;
-
-      expect(requests.length).toEqual(1);
-      const req = requests[0];
-
-      expect(req.method).toEqual(method);
-      expect(req.url).toEqual(path);
-      expect(req.headers['a']).toEqual('1');
-      expect(req.headers['b']).toEqual('2');
     });
 
     it('sets request properties with body', async () => {
-      const server = await httpServer.createServer();
-      const requests = [];
-      let receivedBody;
-      server.on('request', (req, res) => {
-        requests.push(req);
-        httpServer.readAll(req).then(body => {
-          receivedBody = body;
-          httpServer.respond(res, 200);
-        });
+      await withCloseable(TestHttpServers.start, async server => {
+        const method = 'post';
+        server.forMethodAndPath(method, path, TestHttpHandlers.respond(200));
+
+        const headers = { a: '1', b: '2' };
+        const body = '{}';
+        await platform.httpRequest(method, server.url + path, headers, body).promise;
+
+        expect(server.requestCount()).toEqual(1);
+        const req = await server.nextRequest();
+
+        expect(req.method).toEqual(method);
+        expect(req.path).toEqual(path);
+        expect(req.headers['a']).toEqual('1');
+        expect(req.headers['b']).toEqual('2');
+        expect(req.body).toEqual(body);
       });
-
-      const method = 'POST';
-      const headers = { a: '1', b: '2' };
-      const body = '{}';
-      await platform.httpRequest(method, server.url + path, headers, body).promise;
-
-      expect(requests.length).toEqual(1);
-      const req = requests[0];
-
-      expect(req.method).toEqual(method);
-      expect(req.url).toEqual(path);
-      expect(req.headers['a']).toEqual('1');
-      expect(req.headers['b']).toEqual('2');
-      expect(receivedBody).toEqual(body);
     });
 
     it('resolves promise when response is received', async () => {
-      const server = await httpServer.createServer();
-      server.on('request', (req, res) => {
-        httpServer.respond(res, 200, { 'Content-Type': 'text/plain' }, 'hello');
+      await withCloseable(TestHttpServers.start, async server => {
+        server.byDefault(TestHttpHandlers.respond(200, { 'Content-Type': 'text/plain' }, 'hello'));
+
+        const requestInfo = platform.httpRequest('GET', server.url);
+
+        const result = await requestInfo.promise;
+        expect(result.status).toEqual(200);
+        expect(result.header('content-type')).toEqual('text/plain');
+        expect(result.body).toEqual('hello');
       });
-
-      const requestInfo = platform.httpRequest('GET', server.url);
-
-      const result = await requestInfo.promise;
-      expect(result.status).toEqual(200);
-      expect(result.header('content-type')).toEqual('text/plain');
-      expect(result.body).toEqual('hello');
     });
 
     it('rejects promise if request gets a network error', async () => {
-      const requestInfo = platform.httpRequest('GET', 'http://no-such-host');
+      await withCloseable(TestHttpServers.start, async server => {
+        server.byDefault(TestHttpHandlers.networkError());
+        const requestInfo = platform.httpRequest('GET', server.url);
 
-      await expect(requestInfo.promise).rejects.toThrow();
+        await expect(requestInfo.promise).rejects.toThrow();
+      });
     });
   });
 
