@@ -61,11 +61,25 @@ function makeNodePlatform(options) {
     name: 'Node.js',
     nodeVersion: process.versions.node,
     osArch: os.arch(),
-    osName: os.platform(),
+    osName: normalizePlatformName(os.platform()),
     osVersion: os.release(),
   };
 
   return ret;
+}
+
+function normalizePlatformName(platformName) {
+  // The following logic is based on how Node.js reports the platform name
+  switch (platformName) {
+    case 'darwin':
+      return 'MacOS';
+    case 'win32':
+      return 'Windows';
+    case 'linux':
+      return 'Linux';
+    default:
+      return platformName;
+  }
 }
 
 const httpsOptions = [
