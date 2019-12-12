@@ -1,7 +1,9 @@
 const { LocalStorage } = require('node-localstorage');
 const { EventSource } = require('launchdarkly-eventsource');
+const os = require('os');
 const path = require('path');
 const newHttpRequest = require('./httpRequest');
+const packageJson = require('../package.json');
 
 function makeNodePlatform(options) {
   const tlsParams = filterTlsParams(options.tlsParams);
@@ -48,8 +50,36 @@ function makeNodePlatform(options) {
   ret.eventSourceAllowsReport = true;
 
   ret.userAgent = 'NodeClientSide';
+  ret.version = packageJson.version;
+
+  ret.diagnosticSdkData = {
+    name: 'Node client-side',
+    version: packageJson.version,
+  };
+
+  ret.diagnosticPlatformData = {
+    name: 'Node.js',
+    nodeVersion: process.versions.node,
+    osArch: os.arch(),
+    osName: normalizePlatformName(os.platform()),
+    osVersion: os.release(),
+  };
 
   return ret;
+}
+
+function normalizePlatformName(platformName) {
+  // The following logic is based on how Node.js reports the platform name
+  switch (platformName) {
+    case 'darwin':
+      return 'MacOS';
+    case 'win32':
+      return 'Windows';
+    case 'linux':
+      return 'Linux';
+    default:
+      return platformName;
+  }
 }
 
 const httpsOptions = [
