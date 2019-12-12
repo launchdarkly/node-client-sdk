@@ -29,6 +29,7 @@ describe('LDClient TLS configuration', () => {
         baseUrl: server.url,
         sendEvents: false,
         tlsParams: { ca: server.certificate },
+        diagnosticOptOut: true,
       };
       await withCloseable(LDClient.initialize(envName, user, config), async client => {
         await client.waitForInitialization();
@@ -43,6 +44,7 @@ describe('LDClient TLS configuration', () => {
         baseUrl: server.url,
         sendEvents: false,
         logger: stubLogger,
+        diagnosticOptOut: true,
       };
       await withCloseable(LDClient.initialize(envName, user, config), async client => {
         await expect(client.waitForInitialization()).rejects.toThrow(/network error.*self signed/);
@@ -64,6 +66,7 @@ describe('LDClient TLS configuration', () => {
           streaming: true,
           sendEvents: false,
           tlsParams: { ca: server.certificate },
+          diagnosticOptOut: true,
         };
         await withCloseable(LDClient.initialize(envName, user, config), async client => {
           const changeEvents = eventSink(client, 'change:flag');
@@ -86,6 +89,7 @@ describe('LDClient TLS configuration', () => {
         baseUrl: server.url,
         eventsUrl: server.url + '/events',
         tlsParams: { ca: server.certificate },
+        diagnosticOptOut: true,
       };
       await withCloseable(LDClient.initialize(envName, user, config), async client => {
         await client.waitForInitialization();
