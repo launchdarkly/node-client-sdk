@@ -7,11 +7,14 @@ const packageJson = require('../package.json');
 function initialize(env, user, options = {}) {
   // Pass our platform object to the common code to create the Node version of the client
   const platform = nodePlatform(options);
-  const extraDefaults = {};
+  const extraOptionDefs = {
+    localStoragePath: { type: 'string' },
+    tlsParams: { type: 'object' },
+  };
   if (!options.logger) {
-    extraDefaults.logger = createDefaultLogger();
+    extraOptionDefs.logger = { default: createDefaultLogger() };
   }
-  const clientVars = common.initialize(env, user, options, platform, extraDefaults);
+  const clientVars = common.initialize(env, user, options, platform, extraOptionDefs);
 
   clientVars.start();
 
