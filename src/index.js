@@ -1,16 +1,20 @@
 const common = require('launchdarkly-js-sdk-common');
 const winston = require('winston');
 const nodePlatform = require('./nodePlatform');
+const packageJson = require('../package.json');
 
 // This creates a client-side SDK instance to be used in Node.
 function initialize(env, user, options = {}) {
   // Pass our platform object to the common code to create the Node version of the client
   const platform = nodePlatform(options);
-  const extraDefaults = {};
+  const extraOptionDefs = {
+    localStoragePath: { type: 'string' },
+    tlsParams: { type: 'object' },
+  };
   if (!options.logger) {
-    extraDefaults.logger = createDefaultLogger();
+    extraOptionDefs.logger = { default: createDefaultLogger() };
   }
-  const clientVars = common.initialize(env, user, options, platform, extraDefaults);
+  const clientVars = common.initialize(env, user, options, platform, extraOptionDefs);
 
   clientVars.start();
 
@@ -31,4 +35,5 @@ function createDefaultLogger() {
 module.exports = {
   initialize: initialize,
   createConsoleLogger: common.createConsoleLogger,
+  version: packageJson.version,
 };

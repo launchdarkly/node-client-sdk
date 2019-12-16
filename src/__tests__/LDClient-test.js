@@ -1,36 +1,43 @@
 const LDClient = require('../index');
-const httpServer = require('./http-server');
+import * as packageJson from '../../package.json';
+
+const { TestHttpHandlers, TestHttpServers, withCloseable } = require('launchdarkly-js-test-helpers');
 
 describe('LDClient', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
   const user = { key: 'user' };
-  let server;
-
-  beforeEach(async () => {
-    server = await httpServer.createServer();
-    httpServer.autoRespond(server, res => httpServer.respondJson(res, {}));
-  });
-
-  afterEach(() => {
-    httpServer.closeServers();
-  });
 
   it('should exist', () => {
     expect(LDClient).toBeDefined();
   });
 
+  it('should report correct version', () => {
+    expect(LDClient.version).toEqual(packageJson.version);
+  });
+
   describe('initialization', () => {
     it('should trigger the ready event', async () => {
-      const client = LDClient.initialize(envName, user, { baseUrl: server.url, sendEvents: false });
-      await client.waitForInitialization();
+      await withCloseable(TestHttpServers.start, async server => {
+        server.byDefault(TestHttpHandlers.respondJson({}));
+        const config = { baseUrl: server.url, sendEvents: false };
+        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+          await client.waitForInitialization();
+        });
+      });
     });
 
     it('sends correct User-Agent in request', async () => {
-      const client = LDClient.initialize(envName, user, { baseUrl: server.url });
-      await client.waitForInitialization();
+      await withCloseable(TestHttpServers.start, async server => {
+        server.byDefault(TestHttpHandlers.respondJson({}));
+        const config = { baseUrl: server.url, sendEvents: false };
+        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+          await client.waitForInitialization();
 
-      expect(server.requests.length).toEqual(1);
-      expect(server.requests[0].headers['x-launchdarkly-user-agent']).toMatch(/^NodeClientSide\//);
+          expect(server.requestCount()).toEqual(1);
+          const req = await server.nextRequest();
+          expect(req.headers['x-launchdarkly-user-agent']).toMatch(/^NodeClientSide\//);
+        });
+      });
     });
   });
 
@@ -42,16 +49,14 @@ describe('LDClient', () => {
         warn: jest.fn(),
         error: jest.fn(),
       };
-      const client = LDClient.initialize(envName, user, {
-        bootstrap: {},
-        sendEvents: false,
-        logger: logger,
-      });
-      await client.waitForInitialization();
+      const config = { bootstrap: {}, sendEvents: false, logger: logger };
+      await withCloseable(LDClient.initialize(envName, user, config), async client => {
+        await client.waitForInitialization();
 
-      client.track('whatever');
-      expect(logger.warn).not.toHaveBeenCalled();
-      expect(logger.error).not.toHaveBeenCalled();
+        client.track('whatever');
+        expect(logger.warn).not.toHaveBeenCalled();
+        expect(logger.error).not.toHaveBeenCalled();
+      });
     });
   });
 });
