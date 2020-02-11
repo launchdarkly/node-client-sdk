@@ -45,15 +45,19 @@ describe('LDClient', () => {
         const config = { bootstrap: {}, eventsUrl: server.url };
         const client = LDClient.initialize(envName, user, config);
         await withCloseable(client, async () => {
-          const req = await server.nextRequest();
-          expect(req.path).toEqual('/events/diagnostic/' + envName);
+          const req0 = await server.nextRequest();
+          const req1 = await server.nextRequest();
+          // We should have received both the client's usual identify event and a diagnostic init event, but we can't be sure of the ordering.
+          const expectedPath = '/events/diagnostic/' + envName;
+          expect([req0.path, req1.path]).toContain(expectedPath);
+          const req = req0.path === expectedPath ? req0 : req1;
           const data = JSON.parse(req.body);
           expect(data.kind).toEqual('diagnostic-init');
           expect(data.platform).toMatchObject({
-            name: 'Node.js',
+            name: 'Node',
           });
           expect(data.sdk).toMatchObject({
-            name: 'Node client-side',
+            name: 'node-client-sdk',
           });
         });
       });
