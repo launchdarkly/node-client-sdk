@@ -53,12 +53,12 @@ function makeNodePlatform(options) {
   ret.version = packageJson.version;
 
   ret.diagnosticSdkData = {
-    name: 'Node client-side',
+    name: 'node-client-sdk',
     version: packageJson.version,
   };
 
   ret.diagnosticPlatformData = {
-    name: 'Node.js',
+    name: 'Node',
     nodeVersion: process.versions.node,
     osArch: os.arch(),
     osName: normalizePlatformName(os.platform()),
