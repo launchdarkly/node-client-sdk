@@ -2,6 +2,20 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.4.0] - 2020-02-14
+Note: if you are using the LaunchDarkly Relay Proxy to forward events, update the Relay to version 5.10.0 or later before updating to this Node client-side SDK version.
+
+### Added:
+- The SDK now periodically sends diagnostic data to LaunchDarkly, describing the version and configuration of the SDK, the architecture and version of the runtime platform, and performance statistics. No credentials, hostnames, or other identifiable values are included. This behavior can be disabled with the `diagnosticOptOut` option, or configured with `diagnosticRecordingInterval`.
+
+### Fixed:
+- When using secure mode in conjunction with streaming mode, if an application specified a new `hash` parameter while changing the current user with `identify()`, the SDK was not using the new `hash` value when recomputing the stream URL, causing the stream to fail. (Thanks, [andrao](https://github.com/launchdarkly/js-sdk-common/issues/13)!)
+- Changed some exact version dependencies to &#34;highest compatible&#34; dependencies, to avoid having modules that are also used by the host application loaded twice by NPM. The dependency on `js-sdk-common` is still an exact version dependency so that each release of `node-client-sdk` has well-defined behavior for that internal code.
+- Updated comment on `initialize` to clarify the intended singleton usage pattern.
+
+### Removed:
+- Removed an unused transitive dependency on `@babel/polyfill`.
+
 ## [1.3.1] - 2020-01-15
 ### Fixed:
 - The SDK now specifies a uniquely identifiable request header when sending events to LaunchDarkly to ensure that events are only processed once, even if the SDK sends them two times due to a failed initial attempt.
