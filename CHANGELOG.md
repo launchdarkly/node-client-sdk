@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.4.3] - 2020-05-04
+### Fixed:
+- Some diagnostic event data was being sent twice, resulting in extra HTTP requests. This did not affect analytics events, so customer data on the dashboard and in data export would still be correct.
+
 ## [1.4.2] - 2020-03-18
 ### Fixed:
 - Some users reported an error where the SDK said that the content type of a response was `application/json, application/json; charset=utf8`. It is invalid to have multiple Content-Type values in a response and the LaunchDarkly service does not do this, but an improperly configured proxy/gateway might add such a header. Now the SDK will tolerate a value like this as long as it starts with `application/json`.
