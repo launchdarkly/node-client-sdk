@@ -1,46 +1,54 @@
-version: 2
+version: 2.1
+
+orbs:
+   win: circleci/windows@1.0.0
 
 workflows:
-  version: 2
   test:
     jobs:
-      - oldest-long-term-support-release
-      - current-release
-
-node-template: &node-template
-  steps:
-    - checkout
-    - run: echo "Node version:" `node --version`
-    
-    - run: npm install
-
-    - run: npm run lint:all
-
-    - run:
-        command: npm test
-        environment:
-          JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
-
-    - run: npm run check-typescript
-
-    - run:
-        name: dependency audit
-        command: ./scripts/better-audit.sh
-
-    - store_test_results:
-        path: reports/junit
-    - store_artifacts:
-        path: reports/junit
+      - build-test:
+          name: current Node
+          docker-image: circleci/node:latest
+          with-lint: true
+      - build-test:
+          name: oldest supported Node
+          docker-image: circleci/node:6
+          with-lint: false
 
 jobs:
-  oldest-long-term-support-release:
-    <<: *node-template
-    docker:
-      - image: circleci/node:6
-      - image: redis
+  build-test:
+    parameters:
+      docker-image:
+        type: string
+      with-lint:
+        type: boolean
+        default: false
 
-  current-release:
-    <<: *node-template
     docker:
-      - image: circleci/node:latest
-      - image: redis
+      - image: <<parameters.docker-image>>
+
+    steps:
+      - checkout
+      - run: echo "Node version:" `node --version`
+      
+      - run: npm install
+
+      - run:
+          command: npm test
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+
+      - when:
+          condition: <<parameters.with-lint>>
+          steps:
+            - run: npm run lint:all
+            - run: npm run check-typescript
+
+      - run:
+          name: dependency audit
+          command: ./scripts/better-audit.sh
+
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
