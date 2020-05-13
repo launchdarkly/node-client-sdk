@@ -35,7 +35,7 @@
     "jest": "^24.7.3",
     "jest-junit": "^10.0.0",
     "launchdarkly-js-test-helpers": "1.1.0",
-    "prettier": "^2.0.5",
+    "prettier": "^1.11.1",
     "readline-sync": "^1.4.9",
     "semver": "^5.5.0",
     "semver-compare": "^1.0.0",
