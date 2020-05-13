@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.4.4] - 2020-05-13
+### Fixed:
+- The TypeScript declaration for `track()` was missing the optional `metricValue` parameter.
+
 ## [1.4.3] - 2020-05-04
 ### Fixed:
 - Some diagnostic event data was being sent twice, resulting in extra HTTP requests. This did not affect analytics events, so customer data on the dashboard and in data export would still be correct.
