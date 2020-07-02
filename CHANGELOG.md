@@ -2,6 +2,13 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.4.5] - 2020-07-02
+### Changed:
+- The default implementation of logging now uses Winston 3.x rather than Winston 2.x. This does not change the content of the log output, and if you have specified your own custom logger then the SDK still uses that. The only effect is that the SDK no longer has dependencies on Winston 2.x.
+
+### Fixed:
+- Fixed a bug that could cause extra delays when receiving a large streaming update. The process will still be blocked for some amount of time as the JSON data is being parsed, which is unavoidable in the current architecture, but this bug made it block for longer than necessary.
+
 ## [1.4.4] - 2020-05-13
 ### Fixed:
 - The TypeScript declaration for `track()` was missing the optional `metricValue` parameter.
