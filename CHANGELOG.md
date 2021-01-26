@@ -2,6 +2,13 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.4.7] - 2021-01-26
+### Changed:
+- In streaming mode, the SDK now automatically drops and restarts the stream connection if it has received no data from the server within a 5-minute interval. This ensures that if the connection fails in such a way that the SDK cannot detect the failure as an I/O error, it will not hang forever waiting for updates from the phantom connection. The LaunchDarkly streaming service sends a tiny &#34;heartbeat&#34; message at regular intervals less than this timeout, to ensure that the SDK will not drop the connection if it is still usable. This logic exists in most other LaunchDarkly SDKs but was not previously implemented in the Node client-side SDK.
+
+### Fixed:
+- In TypeScript, `LDEvaluationDetail.reason` is now correctly defined as being nullable. This value is `null` if `LDOptions.evaluationReasons` is false.
+
 ## [1.4.6] - 2020-09-14
 ### Fixed:
 - In streaming mode, when connecting to the Relay Proxy rather than directly to the LaunchDarkly streaming service, if the current user was changed twice within a short time it was possible for the SDK to revert to flag values from the previous user.
