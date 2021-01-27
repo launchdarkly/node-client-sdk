@@ -23,9 +23,11 @@ var allOptions: ld.LDOptions = {
   flushInterval: 1,
   samplingInterval: 1,
   streamReconnectDelay: 1,
-  logger: logger
+  logger: logger,
+  autoAliasingOptOut: true
 };
 var userWithKeyOnly: ld.LDUser = { key: 'user' };
+var anonymousUser: ld.LDUser = { key: 'anon-user', anonymous: true };
 var user: ld.LDUser = {
   key: 'user',
   name: 'name',
@@ -54,6 +56,8 @@ client.waitForInitialization().then(() => {});
 client.identify(user).then(() => {});
 client.identify(user, undefined, () => {});
 client.identify(user, 'hash').then(() => {});
+
+client.alias(user, anonymousUser);
 
 var user: ld.LDUser = client.getUser();
 
