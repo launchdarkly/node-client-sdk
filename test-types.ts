@@ -18,6 +18,7 @@ var allOptions: ld.LDOptions = {
   sendEvents: true,
   allAttributesPrivate: true,
   privateAttributeNames: [ 'x' ],
+  inlineUsersInEvents: true,
   allowFrequentDuplicateEvents: true,
   sendEventsOnlyForVariation: true,
   flushInterval: 1,
