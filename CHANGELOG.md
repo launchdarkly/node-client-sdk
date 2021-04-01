@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.5.1] - 2021-04-01
+### Fixed:
+- The property `LDOptions.inlineUsersInEvents` was not included in the TypeScript definitions.
+
 ## [1.5.0] - 2021-01-27
 ### Added:
 - Added the `alias` method. This method can be used to associate two user objects for analytics purposes. When invoked, this method will queue a new alias event to be sent to LaunchDarkly.
