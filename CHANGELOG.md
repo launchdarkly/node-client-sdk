@@ -2,6 +2,12 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [1.5.2] - 2021-06-10
+### Fixed:
+- Events for the [LaunchDarkly debugger](https://docs.launchdarkly.com/home/flags/debugger) are now properly pre-processed to omit private user attributes, as well as enforce only expected top level attributes are sent.
+- Events for the [LaunchDarkly debugger](https://docs.launchdarkly.com/home/flags/debugger) now include the index of the variation responsible for the evaluation result.
+- Updated transitive dependency on the package `url-parse` due to a [vulnerability warning](https://github.com/advisories/GHSA-9m6j-fcg5-2442).
+
 ## [1.5.1] - 2021-04-01
 ### Fixed:
 - The property `LDOptions.inlineUsersInEvents` was not included in the TypeScript definitions.
