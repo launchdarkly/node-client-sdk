@@ -66,6 +66,9 @@ jobs:
     docker:
       - image: <<parameters.docker-image>>
 
+    environment:
+      NODE_ENV: test
+
     steps:
       - checkout
       - run: echo "Node version:" `node --version`
@@ -96,6 +99,10 @@ jobs:
     executor:
       name: win/default
       shell: powershell.exe
+
+    environment:
+      NODE_ENV: test
+
     steps:
       - checkout
       - run: node --version
