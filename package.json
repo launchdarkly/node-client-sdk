@@ -14,8 +14,8 @@
   "scripts": {
     "lint": "eslint --format 'node_modules/eslint-formatter-pretty' --ignore-path .eslintignore",
     "lint:all": "eslint --format 'node_modules/eslint-formatter-pretty' --ignore-path .eslintignore src",
-    "test": "NODE_ENV=test jest",
-    "test:junit": "NODE_ENV=test jest --testResultsProcessor jest-junit",
+    "test": "jest",
+    "test:junit": "jest --testResultsProcessor jest-junit",
     "check-typescript": "node_modules/typescript/bin/tsc"
   },
   "devDependencies": {
