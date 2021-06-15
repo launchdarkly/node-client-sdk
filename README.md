@@ -1,6 +1,8 @@
 # LaunchDarkly Client-Side SDK for Node.js
 
-[![Circle CI](https://circleci.com/gh/launchdarkly/node-client-sdk.svg?style=svg)](https://circleci.com/gh/launchdarkly/node-client-sdk)
+[![NPM](https://img.shields.io/npm/v/launchdarkly-node-client-sdk.svg?style=flat-square)](https://www.npmjs.com/package/launchdarkly-node-client-sdk)
+[![CircleCI](https://circleci.com/gh/launchdarkly/node-client-sdk.svg?style=svg)](https://circleci.com/gh/launchdarkly/node-client-sdk)
+[![Documentation](https://img.shields.io/static/v1?label=GitHub+Pages&message=API+reference&color=00add8)](https://launchdarkly.github.io/node-client-sdk)
 
 The LaunchDarkly Client-Side SDK for Node.js is designed primarily for use by code that is deployed to an end user, such as in a desktop application or a smart device. It follows the client-side LaunchDarkly model for single-user contexts (much like our mobile or JavaScript SDKs). It is not intended for use in multi-user systems such as web servers and applications.
 
@@ -14,15 +16,15 @@ For using LaunchDarkly in *server-side* Node.js applications, refer to our [Serv
 
 ## Supported Node versions
 
-This version of the LaunchDarkly SDK has been tested with Node 6.14 and up.
+This version of the LaunchDarkly SDK is compatible with Node.js versions 12 and above.
 
 ## Getting started
 
-Refer to the [SDK documentation](https://docs.launchdarkly.com/docs/node-client-sdk-reference#section-getting-started) for instructions on getting started with using the SDK.
+Refer to the [SDK documentation](https://docs.launchdarkly.com/sdk/client-side/node-js#getting-started) for instructions on getting started with using the SDK.
 
 ## Learn more
 
-Check out our [documentation](https://docs.launchdarkly.com) for in-depth instructions on configuring and using LaunchDarkly. You can also head straight to the [complete reference guide for this SDK](https://docs.launchdarkly.com/docs/node-client-sdk-reference).
+Check out our [documentation](https://docs.launchdarkly.com) for in-depth instructions on configuring and using LaunchDarkly. You can also head straight to the [complete reference guide for this SDK](https://docs.launchdarkly.com/sdk/client-side/node-js).
 
 The authoritative description of all properties and methods is in the [TypeScript documentation](https://launchdarkly.github.io/node-client-sdk/).
 
