@@ -4,7 +4,7 @@
  * In typical usage, you will call [[initialize]] in the main process at startup time to obtain an
  * an instance of [[LDClient]].
  *
- * For more information, see the [SDK reference guide](http://docs.launchdarkly.com/docs/node-client-sdk-reference).
+ * For more information, see the [SDK reference guide](https://docs.launchdarkly.com/sdk/client-side/node-js).
  */
 declare module 'launchdarkly-node-client-sdk' {
 
@@ -84,7 +84,7 @@ declare module 'launchdarkly-node-client-sdk' {
    *
    * Applications should configure the client at startup time with [[initialize]], and reuse the same instance.
    *
-   * For more information, see the [SDK Reference Guide](http://docs.launchdarkly.com/docs/node-client-sdk-reference).
+   * For more information, see the [SDK Reference Guide](https://docs.launchdarkly.com/sdk/client-side/node-js).
    */
   export interface LDClient extends LDClientBase {
   }
