@@ -12,11 +12,13 @@ declare module 'launchdarkly-node-client-sdk' {
   export * from 'launchdarkly-js-sdk-common';
 
   import {
+    BasicLoggerOptions,
     LDEvaluationDetail,
     LDEvaluationReason,
     LDFlagSet,
     LDFlagValue,
     LDClientBase,
+    LDLogger,
     LDOptionsBase,
     LDUser
   } from 'launchdarkly-js-sdk-common';
@@ -88,4 +90,40 @@ declare module 'launchdarkly-node-client-sdk' {
    */
   export interface LDClient extends LDClientBase {
   }
+
+  /**
+   * Provides a simple [[LDLogger]] implementation.
+   *
+   * This logging implementation uses a simple format that includes only the log level
+   * and the message text. Output is written to the standard error stream (`console.error`).
+   * You can filter by log level as described in [[BasicLoggerOptions.level]].
+   *
+   * To use the logger created by this function, put it into [[LDOptions.logger]]. If
+   * you do not set [[LDOptions.logger]] to anything, the SDK uses a default logger
+   * that is equivalent to `ld.basicLogger({ level: 'info' })`.
+   *
+   * @param options Configuration for the logger. If no options are specified, the
+   *   logger uses `{ level: 'info' }`.
+   * 
+   * @example
+   * This example shows how to use `basicLogger` in your SDK options to enable console
+   * logging only at `warn` and `error` levels.
+   * ```javascript
+   *   const ldOptions = {
+   *     logger: ld.basicLogger({ level: 'warn' }),
+   *   };
+   * ```
+   *
+   * @example
+   * This example shows how to use `basicLogger` in your SDK options to cause log
+   * output to go to `console.log` instead of `console.error`.
+   * ```javascript
+   *   const ldOptions = {
+   *     logger: ld.basicLogger({ destination: console.log }),
+   *   };
+   * ```
+   */
+   export function basicLogger(
+    options?: BasicLoggerOptions
+  ): LDLogger;
 }

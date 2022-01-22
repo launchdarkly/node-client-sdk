@@ -5,7 +5,7 @@
 import * as ld from 'launchdarkly-node-client-sdk';
 
 var emptyOptions: ld.LDOptions = {};
-var logger: ld.LDLogger = ld.createConsoleLogger('info');
+var logger: ld.LDLogger = ld.basicLogger({ level: 'info' });
 var allOptions: ld.LDOptions = {
   bootstrap: { },
   baseUrl: '',
@@ -22,7 +22,6 @@ var allOptions: ld.LDOptions = {
   allowFrequentDuplicateEvents: true,
   sendEventsOnlyForVariation: true,
   flushInterval: 1,
-  samplingInterval: 1,
   streamReconnectDelay: 1,
   logger: logger,
   autoAliasingOptOut: true
@@ -72,7 +71,7 @@ var stringFlagValue: ld.LDFlagValue = client.variation('key', 'default');
 var detail: ld.LDEvaluationDetail = client.variationDetail('key', 'default');
 var detailValue: ld.LDFlagValue = detail.value;
 var detailIndex: number | undefined = detail.variationIndex;
-var detailReason: ld.LDEvaluationReason = detail.reason;
+var detailReason: ld.LDEvaluationReason | undefined = detail.reason;
 
 client.setStreaming(true);
 client.setStreaming();

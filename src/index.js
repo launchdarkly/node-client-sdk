@@ -1,5 +1,5 @@
 const common = require('launchdarkly-js-sdk-common');
-const winston = require('winston');
+const { basicLogger } = require('./basicLogger');
 const nodePlatform = require('./nodePlatform');
 const packageJson = require('../package.json');
 
@@ -12,7 +12,7 @@ function initialize(env, user, options = {}) {
     tlsParams: { type: 'object' },
   };
   if (!options.logger) {
-    extraOptionDefs.logger = { default: createDefaultLogger() };
+    extraOptionDefs.logger = { default: basicLogger() };
   }
   const clientVars = common.initialize(env, user, options, platform, extraOptionDefs);
 
@@ -21,25 +21,8 @@ function initialize(env, user, options = {}) {
   return clientVars.client;
 }
 
-function createDefaultLogger() {
-  const prefixFormat = winston.format(info => {
-    // eslint-disable-next-line no-param-reassign
-    info.message = `[LaunchDarkly] ${info.message ? info.message : ''}`;
-    return info;
-  });
-
-  return winston.createLogger({
-    level: 'info',
-    transports: [
-      new winston.transports.Console({
-        format: winston.format.combine(prefixFormat(), winston.format.simple()),
-      }),
-    ],
-  });
-}
-
 module.exports = {
-  initialize: initialize,
-  createConsoleLogger: common.createConsoleLogger,
+  initialize,
+  basicLogger,
   version: packageJson.version,
 };
