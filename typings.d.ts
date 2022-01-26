@@ -25,6 +25,11 @@ declare module 'launchdarkly-node-client-sdk' {
 //// DOCBUILD-END-REPLACE
 
   /**
+   * The current version string of the SDK.
+   */
+  export const version: string;
+
+  /**
    * Creates an instance of the LaunchDarkly client.
    *
    * Applications should instantiate a single instance for the lifetime of the application.
