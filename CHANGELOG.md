@@ -2,6 +2,32 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [2.0.0] - 2022-01-26
+This major version release is for updating Node.js compatibility, simplifying the SDK's dependencies, and removing deprecated names.
+
+Except for the dependency changes described below which may require minor changes in your build, and a minor new logging feature, usage of the SDK has not changed in this release. For more details about changes that may be necessary, see the [1.x to 2.0 migration guide](https://docs.launchdarkly.com/sdk/client/node-js/migration-1-to-2).
+
+Dropping support for obsolete Node.js versions makes it easier to maintain the SDK and keep its dependencies up to date. See LaunchDarkly's [End of Life Policy](https://launchdarkly.com/policies/end-of-life-policy/) regarding platform version support.
+
+Simplifying dependencies reduces the size of the SDK bundle, as well as reducing potential compatibility problems and vulnerabilities.
+
+### Added:
+- Added `basicLogger`, allowing customization of the SDK's default logging behavior without having to use Winston or provide a full `LDLogger` implementation.
+
+### Changed:
+- The minimum Node.js version is now 12.0.
+- Updated dependencies to newer versions and/or more actively maintained packages.
+- In TypeScript, the property `LDEvaluationDetail.reason` now has a type of `LDEvaluationReason | undefined`, which correctly reflects the fact that evaluation reasons may not always be available.
+
+### Fixed:
+- If the platform local storage mechanism throws an exception (for instance, if file permissions do not allow the data to be saved), the SDK now correctly catches the exception and logs a message about the failure. It will only log this message once during the lifetime of the SDK client.
+
+### Removed:
+- Removed the dependency on [Winston](https://www.npmjs.com/package/winston). You can still tell the SDK to use a Winston logger instance that you have created, just as before, so this change should not affect any applications that are using Winston. But the SDK no longer uses Winston to create a default logger if the application does not specify a logger; instead, it uses the `basicLogger` implementation, which uses the same format as the previous default Winston configuration, so again there should be no visible difference.
+- Removed `createConsoleLogger`, which is replaced by the more flexible `basicLogger`.
+- Removed the type `NonNullableLDEvaluationReason`, which was a side effect of `LDEvaluationDetail.reason` being incorrectly defined before.
+- Removed all types, properties, and functions that were deprecated as of the last 1.x release.
+
 ## [1.5.2] - 2021-06-10
 ### Fixed:
 - Events for the [LaunchDarkly debugger](https://docs.launchdarkly.com/home/flags/debugger) are now properly pre-processed to omit private user attributes, as well as enforce only expected top level attributes are sent.
