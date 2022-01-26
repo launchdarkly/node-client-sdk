@@ -35,7 +35,7 @@ describe('LDClient', () => {
 
           expect(server.requestCount()).toEqual(1);
           const req = await server.nextRequest();
-          expect(req.headers['x-launchdarkly-user-agent']).toMatch(/^NodeClientSide\//);
+          expect(req.headers['user-agent']).toMatch(/^NodeClientSide\//);
         });
       });
     });

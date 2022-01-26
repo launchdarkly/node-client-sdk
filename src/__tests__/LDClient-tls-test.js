@@ -47,7 +47,7 @@ describe('LDClient TLS configuration', () => {
         diagnosticOptOut: true,
       };
       await withCloseable(LDClient.initialize(envName, user, config), async client => {
-        await expect(client.waitForInitialization()).rejects.toThrow(/network error.*self signed/);
+        await expect(client.waitForInitialization()).rejects.toThrow(/network error.*self[- ]signed/);
       });
     });
   });
