@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;launchdarkly-node-client-sdk&quot; | LaunchDarkly Client-Side Node SDK (1.5.2)</title>
-	<meta name="description" content="Documentation for LaunchDarkly Client-Side Node SDK (1.5.2)">
+	<title>&quot;launchdarkly-node-client-sdk&quot; | LaunchDarkly Client-Side Node SDK (2.0.0)</title>
+	<meta name="description" content="Documentation for LaunchDarkly Client-Side Node SDK (2.0.0)">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">LaunchDarkly Client-Side Node SDK (1.5.2)</a>
+					<a href="index.html" class="title">LaunchDarkly Client-Side Node SDK (2.0.0)</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -70,7 +70,7 @@
 					</div>
 					<p>In typical usage, you will call <a href="index.html#initialize">initialize</a> in the main process at startup time to obtain an
 					an instance of <a href="interfaces/_launchdarkly_node_client_sdk_.ldclient.html">LDClient</a>.</p>
-					<p>For more information, see the <a href="http://docs.launchdarkly.com/docs/node-client-sdk-reference">SDK reference guide</a>.</p>
+					<p>For more information, see the <a href="https://docs.launchdarkly.com/sdk/client-side/node-js">SDK reference guide</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -80,22 +80,23 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.basicloggeroptions.html" class="tsd-kind-icon">Basic<wbr>Logger<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldclient.html" class="tsd-kind-icon">LDClient</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldevaluationdetail.html" class="tsd-kind-icon">LDEvaluation<wbr>Detail</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldevaluationreason.html" class="tsd-kind-icon">LDEvaluation<wbr>Reason</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldflagchangeset.html" class="tsd-kind-icon">LDFlag<wbr>Changeset</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldflagset.html" class="tsd-kind-icon">LDFlag<wbr>Set</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldlogger.html" class="tsd-kind-icon">LDLogger</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldoptions.html" class="tsd-kind-icon">LDOptions</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.ldtlsoptions.html" class="tsd-kind-icon">LDTLSOptions</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.lduser.html" class="tsd-kind-icon">LDUser</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="interfaces/_launchdarkly_node_client_sdk_.nonnullableldevaluationreason.html" class="tsd-kind-icon">Non<wbr>NullableLDEvaluation<wbr>Reason</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="index.html#ldevaluationreason" class="tsd-kind-icon">LDEvaluation<wbr>Reason</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="index.html#ldflagvalue" class="tsd-kind-icon">LDFlag<wbr>Value</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="index.html#ldloglevel" class="tsd-kind-icon">LDLog<wbr>Level</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -107,7 +108,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#createconsolelogger" class="tsd-kind-icon">create<wbr>Console<wbr>Logger</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#basiclogger" class="tsd-kind-icon">basic<wbr>Logger</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="index.html#initialize" class="tsd-kind-icon">initialize</a></li>
 							</ul>
 						</section>
@@ -117,29 +118,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="ldevaluationreason" class="tsd-anchor"></a>
-					<h3>LDEvaluation<wbr>Reason</h3>
-					<div class="tsd-signature tsd-kind-icon">LDEvaluation<wbr>Reason<span class="tsd-signature-symbol">:</span> <a href="interfaces/_launchdarkly_node_client_sdk_.nonnullableldevaluationreason.html" class="tsd-signature-type">NonNullableLDEvaluationReason</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in docs/build/typings.d.ts:421</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Describes the reason that a flag evaluation produced a particular value. This is
-							part of the <a href="interfaces/_launchdarkly_node_client_sdk_.ldevaluationdetail.html">LDEvaluationDetail</a> object returned by <a href="interfaces/_launchdarkly_node_client_sdk_.ldclient.html#variationdetail">LDClient.variationDetail</a>.</p>
-						</div>
-						<p>Will be null when <code>&lt;a href=&quot;interfaces/_launchdarkly_node_client_sdk_.ldoptions.html#evaluationreasons&quot;&gt;LDOptions.evaluationReasons&lt;/a&gt;</code> is <code>false</code>.</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="ldflagvalue" class="tsd-anchor"></a>
 					<h3>LDFlag<wbr>Value</h3>
 					<div class="tsd-signature tsd-kind-icon">LDFlag<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in docs/build/typings.d.ts:22</li>
+							<li>Defined in docs/build/typings.d.ts:16</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -147,6 +131,25 @@
 							<p>The types of values a feature flag can have.</p>
 						</div>
 						<p>Flags can have any JSON-serializable value.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="ldloglevel" class="tsd-anchor"></a>
+					<h3>LDLog<wbr>Level</h3>
+					<div class="tsd-signature tsd-kind-icon">LDLog<wbr>Level<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"debug"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"info"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"warn"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"error"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"none"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in docs/build/typings.d.ts:796</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Logging levels that can be used with <a href="index.html#basiclogger">basicLogger</a>.</p>
+						</div>
+						<p>Set <a href="interfaces/_launchdarkly_node_client_sdk_.basicloggeroptions.html#level">BasicLoggerOptions.level</a> to one of these values to control what levels
+							of log messages are enabled. Going from lowest importance (and most verbose)
+							to most importance, the levels are <code>&#39;debug&#39;</code>, <code>&#39;info&#39;</code>, <code>&#39;warn&#39;</code>, and <code>&#39;error&#39;</code>.
+						You can also specify <code>&#39;none&#39;</code> instead to disable all logging.</p>
 					</div>
 				</section>
 			</section>
@@ -158,7 +161,7 @@
 					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in docs/build/typings.d.ts:15</li>
+							<li>Defined in docs/build/typings.d.ts:801</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -171,31 +174,55 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="createconsolelogger" class="tsd-anchor"></a>
-					<h3>create<wbr>Console<wbr>Logger</h3>
+					<a name="basiclogger" class="tsd-anchor"></a>
+					<h3>basic<wbr>Logger</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Console<wbr>Logger<span class="tsd-signature-symbol">(</span>minimumLevel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/_launchdarkly_node_client_sdk_.ldlogger.html" class="tsd-signature-type">LDLogger</a></li>
+						<li class="tsd-signature tsd-kind-icon">basic<wbr>Logger<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="interfaces/_launchdarkly_node_client_sdk_.basicloggeroptions.html" class="tsd-signature-type">BasicLoggerOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/_launchdarkly_node_client_sdk_.ldlogger.html" class="tsd-signature-type">LDLogger</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in docs/build/typings.d.ts:63</li>
+									<li>Defined in docs/build/typings.d.ts:902</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>A basic implementation of logging that uses the global <code>console</code> object. This is used by
-										default in the browser SDK. It sends messages of &quot;debug&quot;, &quot;info&quot;, &quot;warn&quot;, or &quot;error&quot;
-										level (if enable) to <code>console.log()</code>, <code>console.info()</code>, <code>console.warn()</code>, and <code>console.error()</code>
-									respectively.</p>
+									<p>Provides a simple <a href="interfaces/_launchdarkly_node_client_sdk_.ldlogger.html">LDLogger</a> implementation.</p>
 								</div>
-								<p>To make LDClient use this logger, put it in the <code>logger</code> property of <a href="interfaces/_launchdarkly_node_client_sdk_.ldoptions.html">LDOptions</a>.</p>
+								<p>This logging implementation uses a simple format that includes only the log level
+									and the message text. Output is written to the standard error stream (<code>console.error</code>).
+								You can filter by log level as described in <a href="interfaces/_launchdarkly_node_client_sdk_.basicloggeroptions.html#level">BasicLoggerOptions.level</a>.</p>
+								<p>To use the logger created by this function, put it into <a href="interfaces/_launchdarkly_node_client_sdk_.ldoptions.html#logger">LDOptions.logger</a>. If
+									you do not set <a href="interfaces/_launchdarkly_node_client_sdk_.ldoptions.html#logger">LDOptions.logger</a> to anything, the SDK uses a default logger
+								that is equivalent to <code>ld.basicLogger({ level: &#39;info&#39; })</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><p>This example shows how to use <code>basicLogger</code> in your SDK options to enable console
+										logging only at <code>warn</code> and <code>error</code> levels.</p>
+										<pre><code class="language-javascript">  <span class="hljs-keyword">const</span> ldOptions = {
+    <span class="hljs-attr">logger</span>: ld.basicLogger({ <span class="hljs-attr">level</span>: <span class="hljs-string">&#x27;warn&#x27;</span> }),
+  };
+</code></pre>
+									</dd>
+									<dt>example</dt>
+									<dd><p>This example shows how to use <code>basicLogger</code> in your SDK options to cause log
+										output to go to <code>console.log</code> instead of <code>console.error</code>.</p>
+										<pre><code class="language-javascript">  <span class="hljs-keyword">const</span> ldOptions = {
+    <span class="hljs-attr">logger</span>: ld.basicLogger({ <span class="hljs-attr">destination</span>: <span class="hljs-built_in">console</span>.log }),
+  };
+</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>minimumLevel: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="interfaces/_launchdarkly_node_client_sdk_.basicloggeroptions.html" class="tsd-signature-type">BasicLoggerOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Configuration for the logger. If no options are specified, the
+										logger uses <code>{ level: &#39;info&#39; }</code>.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="interfaces/_launchdarkly_node_client_sdk_.ldlogger.html" class="tsd-signature-type">LDLogger</a></h4>
@@ -212,7 +239,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in docs/build/typings.d.ts:755</li>
+									<li>Defined in docs/build/typings.d.ts:821</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -265,10 +292,16 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="interfaces/_launchdarkly_node_client_sdk_.basicloggeroptions.html" class="tsd-kind-icon">Basic<wbr>Logger<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces/_launchdarkly_node_client_sdk_.ldclient.html" class="tsd-kind-icon">LDClient</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces/_launchdarkly_node_client_sdk_.ldevaluationdetail.html" class="tsd-kind-icon">LDEvaluation<wbr>Detail</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="interfaces/_launchdarkly_node_client_sdk_.ldevaluationreason.html" class="tsd-kind-icon">LDEvaluation<wbr>Reason</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces/_launchdarkly_node_client_sdk_.ldflagchangeset.html" class="tsd-kind-icon">LDFlag<wbr>Changeset</a>
@@ -288,20 +321,17 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces/_launchdarkly_node_client_sdk_.lduser.html" class="tsd-kind-icon">LDUser</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="interfaces/_launchdarkly_node_client_sdk_.nonnullableldevaluationreason.html" class="tsd-kind-icon">Non<wbr>NullableLDEvaluation<wbr>Reason</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="index.html#ldevaluationreason" class="tsd-kind-icon">LDEvaluation<wbr>Reason</a>
-					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="index.html#ldflagvalue" class="tsd-kind-icon">LDFlag<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="index.html#ldloglevel" class="tsd-kind-icon">LDLog<wbr>Level</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="index.html#version" class="tsd-kind-icon">version</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="index.html#createconsolelogger" class="tsd-kind-icon">create<wbr>Console<wbr>Logger</a>
+						<a href="index.html#basiclogger" class="tsd-kind-icon">basic<wbr>Logger</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="index.html#initialize" class="tsd-kind-icon">initialize</a>
