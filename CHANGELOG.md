@@ -5,7 +5,7 @@ All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be docu
 ## [2.0.0] - 2022-01-26
 This major version release is for updating Node.js compatibility, simplifying the SDK's dependencies, and removing deprecated names.
 
-Except for the dependency changes described below which may require minor changes in your build, and a minor new logging feature, usage of the SDK has not changed in this release. For more details about changes that may be necessary, see the [1.x to 2.0 migration guide](https://docs.launchdarkly.com/sdk/client/node-js/migration-1-to-2).
+Except for the dependency changes described below which may require minor changes in your build, and a minor new logging feature, usage of the SDK has not changed in this release. For more details about changes that may be necessary, see the [1.x to 2.0 migration guide](https://docs.launchdarkly.com/sdk/client-side/node-js/migration-1-to-2).
 
 Dropping support for obsolete Node.js versions makes it easier to maintain the SDK and keep its dependencies up to date. See LaunchDarkly's [End of Life Policy](https://launchdarkly.com/policies/end-of-life-policy/) regarding platform version support.
 
