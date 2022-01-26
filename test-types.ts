@@ -4,6 +4,8 @@
 
 import * as ld from 'launchdarkly-node-client-sdk';
 
+var ver: string = ld.version;
+
 var emptyOptions: ld.LDOptions = {};
 var logger: ld.LDLogger = ld.basicLogger({ level: 'info' });
 var allOptions: ld.LDOptions = {
