@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [2.0.2] - 2022-03-10
+### Fixed:
+- Removed a transitive dependency on the package `url-parse`, which was flagged in [CVE-2022-0686](https://nvd.nist.gov/vuln/detail/CVE-2022-0686).
+
 ## [2.0.1] - 2022-02-17
 ### Fixed:
 - If the SDK receives invalid JSON data from a streaming connection (possibly as a result of the connection being cut off), it now uses its regular error-handling logic: the error is emitted as an `error` event or, if there are no `error` event listeners, it is logged. Previously, the error would be thrown as an unhandled exception.
