@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [2.0.3] - 2022-03-14
+### Fixed:
+- The `original` dependency (and therefore its transitive dependency `url-parse`) had accidentally been included twice, once as a dependency of `js-eventsource` and then again directly in the SDK's `package.json`. This has been removed so there is no longer any reference to the vulnerable `url-parse` that was meant to be removed in [2.0.2](https://github.com/launchdarkly/node-client-sdk/releases/tag/2.0.2). (Thanks, [AlexHladin](https://github.com/launchdarkly/node-client-sdk/pull/26)!)
+
 ## [2.0.2] - 2022-03-10
 ### Fixed:
 - Removed a transitive dependency on the package `url-parse`, which was flagged in [CVE-2022-0686](https://nvd.nist.gov/vuln/detail/CVE-2022-0686).
