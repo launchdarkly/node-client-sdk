@@ -21,7 +21,8 @@ app.get('/', (req, res) => {
   res.json({
     capabilities: [
       'client-side',
-      'service-endpoints'
+      'service-endpoints',
+      'tags'
     ],
   });
 });

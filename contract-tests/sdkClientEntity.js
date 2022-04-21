@@ -53,6 +53,13 @@ function makeSdkConfig(options, tag) {
     cf.sendEvents = false;
   }
 
+  if (options.tags) {
+    cf.application = {
+      id: options.tags.applicationId,
+      version: options.tags.applicationVersion
+    };
+  }
+
   return cf;
 }
 
