@@ -14,8 +14,7 @@
   "scripts": {
     "lint": "eslint --format 'node_modules/eslint-formatter-pretty' --ignore-path .eslintignore",
     "lint:all": "eslint --format 'node_modules/eslint-formatter-pretty' --ignore-path .eslintignore src",
-    "test": "jest",
-    "test:junit": "jest --testResultsProcessor jest-junit",
+    "test": "jest --ci",
     "check-typescript": "node_modules/typescript/bin/tsc",
     "contract-test-service": "npm --prefix contract-tests install && npm --prefix contract-tests start",
     "contract-test-harness": "curl -s https://raw.githubusercontent.com/launchdarkly/sdk-test-harness/main/downloader/run.sh \\ | VERSION=v1 PARAMS=\"-url http://localhost:8000 -debug -stop-service-at-end $TEST_HARNESS_PARAMS\" sh",
@@ -46,6 +45,18 @@
     "semver": "^5.5.0",
     "semver-compare": "^1.0.0",
     "typescript": "^3.8.3"
+  },
+  "jest": {
+    "rootDir": "src",
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/**/*-test.js"
+    ],
+    "testResultsProcessor": "jest-junit"
+  },
+  "jest-junit": {
+    "outputDirectory": "./reports/junit",
+    "outputName": "junit.xml"
   },
   "dependencies": {
     "launchdarkly-eventsource": "1.4.3",
