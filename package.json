@@ -1,6 +1,6 @@
 {
   "name": "launchdarkly-node-client-sdk",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "LaunchDarkly Client-Side SDK for Node.js",
   "author": "LaunchDarkly <team@launchdarkly.com>",
   "license": "Apache-2.0",
