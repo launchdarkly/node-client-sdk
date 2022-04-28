@@ -2,6 +2,13 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [2.0.4] - 2022-04-27
+### Changed:
+- CI builds now include a cross-platform test suite implemented in https://github.com/launchdarkly/sdk-test-harness. This covers many test cases that are also implemented in unit tests, but may be extended in the future to ensure consistent behavior across SDKs in other areas.
+
+### Fixed:
+- The `baseUrl`, `streamUrl`, and `eventsUrl` properties now work properly regardless of whether the URL string has a trailing slash. Previously, a trailing slash would cause request URL paths to have double slashes.
+
 ## [2.0.3] - 2022-03-14
 ### Fixed:
 - The `original` dependency (and therefore its transitive dependency `url-parse`) had accidentally been included twice, once as a dependency of `js-eventsource` and then again directly in the SDK's `package.json`. This has been removed so there is no longer any reference to the vulnerable `url-parse` that was meant to be removed in [2.0.2](https://github.com/launchdarkly/node-client-sdk/releases/tag/2.0.2). (Thanks, [AlexHladin](https://github.com/launchdarkly/node-client-sdk/pull/26)!)
