@@ -77,10 +77,13 @@ async function newSdkClientEntity(options) {
     options.configuration.startWaitTimeMs !== null && options.configuration.startWaitTimeMs !== undefined
       ? options.configuration.startWaitTimeMs
       : 5000;
+  const sdkConfig = makeSdkConfig(options.configuration, options.tag);
+  const initialUser = (options.configuration.clientSide && options.configuration.clientSide.initialUser)
+    || makeDefaultInitialUser();
   const client = ld.initialize(
     options.configuration.credential || 'unknown-env-id',
-    (options.clientSide && options.clientSide.initialUser) || makeDefaultInitialUser(),
-    makeSdkConfig(options.configuration, options.tag)
+    initialUser,
+    sdkConfig
   );
   let failed = false;
   try {
