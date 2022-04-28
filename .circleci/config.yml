@@ -16,14 +16,17 @@ workflows:
           docker-image: cimg/node:current
           run-lint: true
       - build-test-linux:
-          name: Node 16.3
-          docker-image: cimg/node:16.3
+          name: Node 17.9
+          docker-image: cimg/node:17.9
+      - build-test-linux:
+          name: Node 16.14
+          docker-image: cimg/node:16.14
       - build-test-linux:
           name: Node 15.14
           docker-image: cimg/node:15.14
       - build-test-linux:
-          name: Node 14.17
-          docker-image: cimg/node:14.17
+          name: Node 14.19
+          docker-image: cimg/node:14.19
       - build-test-linux:
           name: Node 13.14
           docker-image: cimg/node:13.14
@@ -41,6 +44,9 @@ jobs:
       run-lint:
         type: boolean
         default: false
+      run-contract-tests:
+        type: boolean
+        default: true
 
     docker:
       - image: <<parameters.docker-image>>
@@ -54,16 +60,26 @@ jobs:
       
       - run: npm install
 
-      - run:
-          command: npm test
-          environment:
-            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+      - run: npm run test
 
       - when:
           condition: <<parameters.run-lint>>
           steps:
             - run: npm run lint:all
             - run: npm run check-typescript
+
+      - when:
+          condition: <<parameters.run-contract-tests>>
+          steps:
+            - run:
+                name: start contact test service
+                command: npm run contract-test-service
+                background: true
+            - run:
+                name: run contract tests
+                command: |
+                  mkdir -p reports/junit
+                  TEST_HARNESS_PARAMS="-junit reports/junit/contract-test-results.xml" npm run contract-test-harness
 
       - run:
           name: dependency audit

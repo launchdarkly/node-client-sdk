@@ -39,3 +39,9 @@ To verify that the TypeScript declarations compile correctly (this involves comp
 ```
 npm run check-typescript
 ```
+
+To run the SDK contract test suite (see [`contract-tests/README.md`](./contract-tests/README.md)):
+
+```bash
+npm run contract-tests
+```
