@@ -2,6 +2,14 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [2.1.0] - 2022-10-06
+### Changed:
+- Updated `js-sdk-common` version which removed event de-duplication functionality which was made redundant by support of summary events. This will improve the default event behavior when using experimentation.
+
+- Updated development dependencies to recent versions.
+
+- Updated CI builds to current node LTS versions and dropped build support for node 12.
+
 ## [2.0.4] - 2022-04-27
 ### Changed:
 - CI builds now include a cross-platform test suite implemented in https://github.com/launchdarkly/sdk-test-harness. This covers many test cases that are also implemented in unit tests, but may be extended in the future to ensure consistent behavior across SDKs in other areas.
