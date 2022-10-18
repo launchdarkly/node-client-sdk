@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LDLogger | LaunchDarkly Client-Side Node SDK (2.2.0)</title>
+	<title>LDInspectionFlagDetailsChangedHandler | LaunchDarkly Client-Side Node SDK (2.2.0)</title>
 	<meta name="description" content="Documentation for LaunchDarkly Client-Side Node SDK (2.2.0)">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../index.html">&quot;launchdarkly-node-client-sdk&quot;</a>
 				</li>
 				<li>
-					<a href="_launchdarkly_node_client_sdk_.ldlogger.html">LDLogger</a>
+					<a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html">LDInspectionFlagDetailsChangedHandler</a>
 				</li>
 			</ul>
-			<h1>Interface LDLogger</h1>
+			<h1>Interface LDInspectionFlagDetailsChangedHandler</h1>
 		</div>
 	</div>
 </header>
@@ -69,18 +69,21 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The minimal interface for any object that LDClient can use for logging.</p>
+						<p>Callback interface for collecting information about the SDK at runtime.</p>
 					</div>
-					<p>The client uses four log levels, with &quot;error&quot; being the most severe. Each corresponding
-						logger method takes a single string parameter. The logger implementation is responsible
-					for deciding whether to produce output or not based on the level.</p>
+					<p>This interface is used to collect information about flag data. In order to understand the
+						current flag state it should be combined with {@link LDInspectionFlagValueChangedHandler}.
+						This interface will get the initial flag information, and
+					{@link LDInspectionFlagValueChangedHandler} will provide changes to individual flags.</p>
+					<p>This interface should not be used by the application to access flags for the purpose of controlling application
+					flow. It is intended for monitoring, analytics, or debugging purposes.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LDLogger</span>
+						<span class="target">LDInspectionFlagDetailsChangedHandler</span>
 					</li>
 				</ul>
 			</section>
@@ -91,10 +94,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_launchdarkly_node_client_sdk_.ldlogger.html#debug" class="tsd-kind-icon">debug</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_launchdarkly_node_client_sdk_.ldlogger.html#error" class="tsd-kind-icon">error</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_launchdarkly_node_client_sdk_.ldlogger.html#info" class="tsd-kind-icon">info</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_launchdarkly_node_client_sdk_.ldlogger.html#warn" class="tsd-kind-icon">warn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html#method" class="tsd-kind-icon">method</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,27 +105,33 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="debug" class="tsd-anchor"></a>
-					<h3>debug</h3>
-					<div class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<a name="method" class="tsd-anchor"></a>
+					<h3>method</h3>
+					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>details<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">Record</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="_launchdarkly_node_client_sdk_.ldevaluationdetail.html" class="tsd-signature-type">LDEvaluationDetail</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in docs/build/typings.d.ts:43</li>
+							<li>Defined in docs/build/typings.d.ts:883</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>This method is called when the flags in the store are replaced with new flags. It will contain all flags
+							regardless of if they have been evaluated.</p>
+						</div>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>details<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">Record</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="_launchdarkly_node_client_sdk_.ldevaluationdetail.html" class="tsd-signature-type">LDEvaluationDetail</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>message: <span class="tsd-signature-type">string</span></h5>
+												<h5>details: <a href="" class="tsd-signature-type">Record</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="_launchdarkly_node_client_sdk_.ldevaluationdetail.html" class="tsd-signature-type">LDEvaluationDetail</a><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -134,97 +142,29 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="error" class="tsd-anchor"></a>
-					<h3>error</h3>
-					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in docs/build/typings.d.ts:46</li>
+							<li>Defined in docs/build/typings.d.ts:877</li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>message: <span class="tsd-signature-type">string</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Name of the inspector. Will be used for logging issues with the inspector.</p>
+						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="info" class="tsd-anchor"></a>
-					<h3>info</h3>
-					<div class="tsd-signature tsd-kind-icon">info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"flag-details-changed"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in docs/build/typings.d.ts:44</li>
+							<li>Defined in docs/build/typings.d.ts:872</li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>message: <span class="tsd-signature-type">string</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="warn" class="tsd-anchor"></a>
-					<h3>warn</h3>
-					<div class="tsd-signature tsd-kind-icon">warn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in docs/build/typings.d.ts:45</li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>message: <span class="tsd-signature-type">string</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -259,36 +199,33 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailchangedhandler.html" class="tsd-kind-icon">LDInspection<wbr>Flag<wbr>Detail<wbr>Changed<wbr>Handler</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html" class="tsd-kind-icon">LDInspection<wbr>Flag<wbr>Details<wbr>Changed<wbr>Handler</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html#method" class="tsd-kind-icon">method</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_launchdarkly_node_client_sdk_.ldinspectionflagdetailschangedhandler.html#type" class="tsd-kind-icon">type</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_launchdarkly_node_client_sdk_.ldinspectionflagusedhandler.html" class="tsd-kind-icon">LDInspection<wbr>Flag<wbr>Used<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_launchdarkly_node_client_sdk_.ldinspectionidentifyhandler.html" class="tsd-kind-icon">LDInspection<wbr>Identify<wbr>Handler</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_launchdarkly_node_client_sdk_.ldlogger.html" class="tsd-kind-icon">LDLogger</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_launchdarkly_node_client_sdk_.ldlogger.html#debug" class="tsd-kind-icon">debug</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_launchdarkly_node_client_sdk_.ldlogger.html#error" class="tsd-kind-icon">error</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_launchdarkly_node_client_sdk_.ldlogger.html#info" class="tsd-kind-icon">info</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_launchdarkly_node_client_sdk_.ldlogger.html#warn" class="tsd-kind-icon">warn</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="_launchdarkly_node_client_sdk_.ldoptions.html" class="tsd-kind-icon">LDOptions</a>
 					</li>
