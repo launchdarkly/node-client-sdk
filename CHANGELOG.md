@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [2.2.0] - 2022-10-18
+### Changed:
+- Upgrade to `js-sdk-common` `4.3.1` which added support for `Inspectors` that can be used for collecting information for monitoring, analytics, and debugging.
+
 ## [2.1.0] - 2022-10-06
 ### Changed:
 - Updated `js-sdk-common` version which removed event de-duplication functionality which was made redundant by support of summary events. This will improve the default event behavior when using experimentation.
