@@ -5,7 +5,7 @@ const { TestHttpHandlers, TestHttpServers, withCloseable } = require('launchdark
 
 describe('LDClient', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
-  const user = { key: 'user' };
+  const context = { key: 'user' };
 
   it('should exist', () => {
     expect(LDClient).toBeDefined();
@@ -20,7 +20,7 @@ describe('LDClient', () => {
       await withCloseable(TestHttpServers.start, async server => {
         server.byDefault(TestHttpHandlers.respondJson({}));
         const config = { baseUrl: server.url, sendEvents: false };
-        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+        await withCloseable(LDClient.initialize(envName, context, config), async client => {
           await client.waitForInitialization();
         });
       });
@@ -30,7 +30,7 @@ describe('LDClient', () => {
       await withCloseable(TestHttpServers.start, async server => {
         server.byDefault(TestHttpHandlers.respondJson({}));
         const config = { baseUrl: server.url, sendEvents: false };
-        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+        await withCloseable(LDClient.initialize(envName, context, config), async client => {
           await client.waitForInitialization();
 
           expect(server.requestCount()).toEqual(1);
@@ -50,7 +50,7 @@ describe('LDClient', () => {
         error: jest.fn(),
       };
       const config = { bootstrap: {}, sendEvents: false, logger: logger };
-      await withCloseable(LDClient.initialize(envName, user, config), async client => {
+      await withCloseable(LDClient.initialize(envName, context, config), async client => {
         await client.waitForInitialization();
 
         client.track('whatever');

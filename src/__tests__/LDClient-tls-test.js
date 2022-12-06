@@ -17,10 +17,10 @@ const stubLogger = {
 
 describe('LDClient TLS configuration', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
-  const user = { key: 'user' };
-  const encodedUser = 'eyJrZXkiOiJ1c2VyIn0';
-  const expectedPollingUrl = '/sdk/evalx/' + envName + '/users/' + encodedUser;
-  const expectedStreamingUrl = '/eval/' + envName + '/' + encodedUser;
+  const context = { key: 'user' };
+  const encodedContext = 'eyJrZXkiOiJ1c2VyIn0';
+  const expectedPollingUrl = '/sdk/evalx/' + envName + '/contexts/' + encodedContext;
+  const expectedStreamingUrl = '/eval/' + envName + '/' + encodedContext;
 
   it('can connect via HTTPS to a server with a self-signed certificate, if CA is specified', async () => {
     await withCloseable(TestHttpServers.startSecure, async server => {
@@ -31,7 +31,7 @@ describe('LDClient TLS configuration', () => {
         tlsParams: { ca: server.certificate },
         diagnosticOptOut: true,
       };
-      await withCloseable(LDClient.initialize(envName, user, config), async client => {
+      await withCloseable(LDClient.initialize(envName, context, config), async client => {
         await client.waitForInitialization();
       });
     });
@@ -46,7 +46,7 @@ describe('LDClient TLS configuration', () => {
         logger: stubLogger,
         diagnosticOptOut: true,
       };
-      await withCloseable(LDClient.initialize(envName, user, config), async client => {
+      await withCloseable(LDClient.initialize(envName, context, config), async client => {
         await expect(client.waitForInitialization()).rejects.toThrow(/network error.*self[- ]signed/);
       });
     });
@@ -68,7 +68,7 @@ describe('LDClient TLS configuration', () => {
           tlsParams: { ca: server.certificate },
           diagnosticOptOut: true,
         };
-        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+        await withCloseable(LDClient.initialize(envName, context, config), async client => {
           const changeEvents = eventSink(client, 'change:flag');
 
           await client.waitForInitialization();
@@ -91,7 +91,7 @@ describe('LDClient TLS configuration', () => {
         tlsParams: { ca: server.certificate },
         diagnosticOptOut: true,
       };
-      await withCloseable(LDClient.initialize(envName, user, config), async client => {
+      await withCloseable(LDClient.initialize(envName, context, config), async client => {
         await client.waitForInitialization();
         await client.flush();
 

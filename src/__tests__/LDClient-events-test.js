@@ -4,7 +4,7 @@ const { TestHttpHandlers, TestHttpServers, sleepAsync, withCloseable } = require
 
 describe('LDClient', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
-  const user = { key: 'user' };
+  const context = { key: 'user' };
 
   // Event generation in general is tested in a non-platform-specific way in launchdarkly-js-sdk-common.
   // The following tests just demonstrate that the common client calls our platform object when it
@@ -15,7 +15,7 @@ describe('LDClient', () => {
     it('sends an event for track()', async () => {
       await withCloseable(TestHttpServers.start, async server => {
         const config = { bootstrap: {}, eventsUrl: server.url, diagnosticOptOut: true };
-        const client = LDClient.initialize(envName, user, config);
+        const client = LDClient.initialize(envName, context, config);
         await withCloseable(client, async () => {
           const data = { thing: 'stuff' };
           await client.waitForInitialization();
@@ -30,7 +30,7 @@ describe('LDClient', () => {
           const trackEvent = events[1];
           expect(trackEvent.kind).toEqual('custom');
           expect(trackEvent.key).toEqual('eventkey');
-          expect(trackEvent.userKey).toEqual(user.key);
+          expect(trackEvent.contextKeys).toEqual({ user: 'user' });
           expect(trackEvent.data).toEqual(data);
           expect(trackEvent.url).toEqual(null);
         });
@@ -65,7 +65,7 @@ describe('LDClient', () => {
       await withCloseable(TestHttpServers.start, async server => {
         server.byDefault(TestHttpHandlers.respond(202));
         const config = { bootstrap: {}, eventsUrl: server.url };
-        const client = LDClient.initialize(envName, user, config);
+        const client = LDClient.initialize(envName, context, config);
         await withCloseable(client, async () => {
           const data = await expectDiagnosticEventAndDiscardRegularEvent(server);
           expect(data.kind).toEqual('diagnostic-init');

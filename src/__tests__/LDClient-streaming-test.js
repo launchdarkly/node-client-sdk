@@ -15,9 +15,9 @@ const {
 
 describe('LDClient streaming', () => {
   const envName = 'UNKNOWN_ENVIRONMENT_ID';
-  const user = { key: 'user' };
-  const encodedUser = 'eyJrZXkiOiJ1c2VyIn0';
-  const expectedGetUrl = '/eval/' + envName + '/' + encodedUser;
+  const context = { key: 'user' };
+  const encodedContext = 'eyJrZXkiOiJ1c2VyIn0';
+  const expectedGetUrl = '/eval/' + envName + '/' + encodedContext;
   const expectedReportUrl = '/eval/' + envName;
 
   it('makes GET request and receives an event', async () => {
@@ -34,7 +34,7 @@ describe('LDClient streaming', () => {
           streamUrl: server.url,
           sendEvents: false,
         };
-        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+        await withCloseable(LDClient.initialize(envName, context, config), async client => {
           const changeEvents = eventSink(client, 'change:flag');
           await client.waitForInitialization();
 
@@ -62,7 +62,7 @@ describe('LDClient streaming', () => {
           sendEvents: false,
           useReport: true,
         };
-        await withCloseable(LDClient.initialize(envName, user, config), async client => {
+        await withCloseable(LDClient.initialize(envName, context, config), async client => {
           const changeEvents = eventSink(client, 'change:flag');
           await client.waitForInitialization();
 
@@ -71,7 +71,7 @@ describe('LDClient streaming', () => {
 
           expect(server.requestCount()).toEqual(1);
           const req = await server.nextRequest();
-          expect(req.body).toEqual(JSON.stringify(user));
+          expect(req.body).toEqual(JSON.stringify(context));
         });
       });
     });
