@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [2.2.2] - 2022-12-19
+### Fixed:
+- Upgraded to `js-sdk-common` version `4.3.3` which fixed this [issue](https://github.com/launchdarkly/js-sdk-common/issues/84): Warning: Accessing non-existent property 'messages' of module exports inside circular dependency
+
 ## [2.2.1] - 2022-10-21
 ### Changed:
 - Upgraded to `js-sdk-common` version `4.3.2` which includes implementations of `jitter` and `backoff` for streaming connections. When a connection fails the retry will start at the `streamReconnectDelay` and will double on each unsuccessful consecutive connection attempt (`backoff`) to a max of 30 seconds. The delay will be adjusted from 50%-100% of the calculated delay to prevent many clients from attempting to reconnect at the same time (`jitter`).
