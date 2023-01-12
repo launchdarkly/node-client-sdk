@@ -22,7 +22,8 @@ app.get('/', (req, res) => {
     capabilities: [
       'client-side',
       'service-endpoints',
-      'tags'
+      'tags',
+      'user-type',
     ],
   });
 });

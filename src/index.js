@@ -4,7 +4,7 @@ const nodePlatform = require('./nodePlatform');
 const packageJson = require('../package.json');
 
 // This creates a client-side SDK instance to be used in Node.
-function initialize(env, user, options = {}) {
+function initialize(env, context, options = {}) {
   // Pass our platform object to the common code to create the Node version of the client
   const platform = nodePlatform(options);
   const extraOptionDefs = {
@@ -14,7 +14,7 @@ function initialize(env, user, options = {}) {
   if (!options.logger) {
     extraOptionDefs.logger = { default: basicLogger() };
   }
-  const clientVars = common.initialize(env, user, options, platform, extraOptionDefs);
+  const clientVars = common.initialize(env, context, options, platform, extraOptionDefs);
 
   clientVars.start();
 
