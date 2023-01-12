@@ -17,7 +17,7 @@
     "test": "jest --ci",
     "check-typescript": "node_modules/typescript/bin/tsc",
     "contract-test-service": "npm --prefix contract-tests install && npm --prefix contract-tests start",
-    "contract-test-harness": "curl -s https://raw.githubusercontent.com/launchdarkly/sdk-test-harness/main/downloader/run.sh \\ | VERSION=v1 PARAMS=\"-url http://localhost:8000 -debug -stop-service-at-end $TEST_HARNESS_PARAMS\" sh",
+    "contract-test-harness": "curl -s https://raw.githubusercontent.com/launchdarkly/sdk-test-harness/main/downloader/run.sh \\ | VERSION=v2 PARAMS=\"-url http://localhost:8000 -debug -stop-service-at-end $TEST_HARNESS_PARAMS\" sh",
     "contract-tests": "npm run contract-test-service & npm run contract-test-harness"
   },
   "engines": {
@@ -40,7 +40,8 @@
     "jest-junit": "^14.0.1",
     "launchdarkly-js-test-helpers": "1.2.1",
     "prettier": "2.7.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "typedoc": "^0.23.24"
   },
   "jest": {
     "rootDir": "src",
@@ -64,7 +65,7 @@
   },
   "dependencies": {
     "launchdarkly-eventsource": "1.4.3",
-    "launchdarkly-js-sdk-common": "4.3.3",
+    "launchdarkly-js-sdk-common": "5.0.1",
     "node-localstorage": "^1.3.1"
   },
   "repository": {

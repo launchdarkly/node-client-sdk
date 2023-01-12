@@ -1,11 +1,3 @@
-/**
- * This is the API reference for the LaunchDarkly Client-Side Node SDK.
- *
- * In typical usage, you will call [[initialize]] in the main process at startup time to obtain an
- * an instance of [[LDClient]].
- *
- * For more information, see the [SDK reference guide](https://docs.launchdarkly.com/sdk/client-side/node-js).
- */
 declare module 'launchdarkly-node-client-sdk' {
 
 //// DOCBUILD-START-REPLACE  (see docs/Makefile)
@@ -20,7 +12,7 @@ declare module 'launchdarkly-node-client-sdk' {
     LDClientBase,
     LDLogger,
     LDOptionsBase,
-    LDUser
+    LDContext
   } from 'launchdarkly-js-sdk-common';
 //// DOCBUILD-END-REPLACE
 
@@ -39,22 +31,22 @@ declare module 'launchdarkly-node-client-sdk' {
    *
    * @param envKey
    *   The LaunchDarkly environment ID.
-   * @param user
-   *   The initial user properties. These can be changed later with [[LDClient.identify]].
-   *   The user must have a `key` property, except that if you omit `user.key` and set `user.anonymous` to
+   * @param context
+   *   The initial context properties. These can be changed later with [[LDClient.identify]].
+   *   The context must have a `key` property, except that if you omit `context.key` and set `context.anonymous` to
    *   true, the SDK will create a randomized unique key (which will be cached in local storage for the
    *   current OS user account, so the next initialization will reuse the same key).
    * @param options
    *   Optional configuration settings.
    */
-  export function initialize(envKey: string, user: LDUser, options?: LDOptions): LDClient;
+  export function initialize(envKey: string, context: LDContext, options?: LDOptions): LDClient;
 
   /**
    * Initialization options for the LaunchDarkly client.
    */
   export interface LDOptions extends LDOptionsBase {
     /**
-     * Determines where flag values and anonymous user keys are cached in the filesystem. By
+     * Determines where flag values and anonymous context keys are cached in the filesystem. By
      * default, this is the current directory.
      */
     localStoragePath?: string;

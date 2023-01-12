@@ -16,7 +16,8 @@ function makeSdkConfig(options, tag) {
     autoAliasingOptOut: options.clientSide.autoAliasingOptOut,
     evaluationReasons: options.clientSide.evaluationReasons,
     logger: sdkLogger(tag),
-    useReport: options.clientSide.useReport
+    useReport: options.clientSide.useReport,
+    sendEventsOnlyForVariation: true,
   };
   
   if (options.serviceEndpoints) {
@@ -47,8 +48,7 @@ function makeSdkConfig(options, tag) {
     cf.eventCapacity = options.events.capacity;
     cf.diagnosticOptOut = !options.events.enableDiagnostics;
     cf.flushInterval = maybeTime(options.events.flushIntervalMs);
-    cf.inlineUsersInEvents = options.events.inlineUsers;
-    cf.privateAttributeNames = options.events.globalPrivateAttributes;
+    cf.privateAttributes = options.events.globalPrivateAttributes;
   } else {
     cf.sendEvents = false;
   }
@@ -63,8 +63,8 @@ function makeSdkConfig(options, tag) {
   return cf;
 }
 
-function makeDefaultInitialUser() {
-  return {key: 'key-not-specified'};
+function makeDefaultInitialContext() {
+  return {kind: 'user', key: 'key-not-specified'};
 }
 
 async function newSdkClientEntity(options) {
@@ -78,11 +78,12 @@ async function newSdkClientEntity(options) {
       ? options.configuration.startWaitTimeMs
       : 5000;
   const sdkConfig = makeSdkConfig(options.configuration, options.tag);
-  const initialUser = (options.configuration.clientSide && options.configuration.clientSide.initialUser)
-    || makeDefaultInitialUser();
+  const initialContext = options.configuration.clientSide?.initialUser ||
+    options.configuration.clientSide?.initialContext ||
+    makeDefaultInitialContext();
   const client = ld.initialize(
     options.configuration.credential || 'unknown-env-id',
-    initialUser,
+    initialContext,
     sdkConfig
   );
   let failed = false;
@@ -119,7 +120,7 @@ async function newSdkClientEntity(options) {
         return { state: client.allFlags() };
 
       case 'identifyEvent':
-        await client.identify(params.identifyEvent.user);
+        await client.identify(params.identifyEvent.user || params.identifyEvent.context);
         return undefined;
 
       case 'customEvent': {
@@ -127,10 +128,6 @@ async function newSdkClientEntity(options) {
         client.track(pce.eventKey, pce.data, pce.metricValue);
         return undefined;
       }
-
-      case 'aliasEvent':
-        client.alias(params.aliasEvent.user, params.aliasEvent.previousUser);
-        return undefined;
 
       case 'flushEvents':
         client.flush();
