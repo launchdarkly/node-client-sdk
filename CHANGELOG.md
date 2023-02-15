@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.0.1] - 2023-02-15
+### Changed:
+- Upgrade to `js-sdk-common` version `5.0.2`. This removes usage of optional chaining (`?.`) to allow for use with older transpilers.
+
 ## [3.0.0] - 2023-01-12
 The latest version of this SDK supports LaunchDarkly's new custom contexts feature. Contexts are an evolution of a previously-existing concept, "users." Contexts let you create targeting rules for feature flags based on a variety of different information, including attributes pertaining to users, organizations, devices, and more. You can even combine contexts to create "multi-contexts." 
 
