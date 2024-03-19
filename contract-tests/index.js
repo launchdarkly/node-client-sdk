@@ -24,6 +24,8 @@ app.get('/', (req, res) => {
       'service-endpoints',
       'tags',
       'user-type',
+      'inline-context',
+      'anonymous-redaction',
     ],
   });
 });
