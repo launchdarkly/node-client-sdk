@@ -2,6 +2,11 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.1.0] - 2024-03-19
+### Changed:
+- Redact anonymous attributes within feature events
+- Always inline contexts for feature events
+
 ## [3.0.2] - 2023-03-21
 ### Changed:
 - Update `LDContext` to allow for key to be optional. This is used when making an anonymous context with a generated key.
