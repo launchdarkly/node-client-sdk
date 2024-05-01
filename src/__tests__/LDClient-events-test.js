@@ -18,7 +18,7 @@ describe('LDClient', () => {
         const client = LDClient.initialize(envName, context, config);
         await withCloseable(client, async () => {
           const data = { thing: 'stuff' };
-          await client.waitForInitialization();
+          await client.waitForInitialization(5);
 
           client.track('eventkey', data);
           await client.flush();

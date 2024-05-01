@@ -19,7 +19,7 @@ function makeSdkConfig(options, tag) {
     useReport: options.clientSide.useReport,
     sendEventsOnlyForVariation: true,
   };
-  
+
   if (options.serviceEndpoints) {
     cf.streamUrl = options.serviceEndpoints.streaming;
     cf.baseUrl = options.serviceEndpoints.polling;
@@ -72,7 +72,7 @@ async function newSdkClientEntity(options) {
   const log = Log(options.tag);
 
   log.info('Creating client with configuration: ' + JSON.stringify(options.configuration));
-  
+
   const timeout =
     options.configuration.startWaitTimeMs !== null && options.configuration.startWaitTimeMs !== undefined
       ? options.configuration.startWaitTimeMs
@@ -88,10 +88,10 @@ async function newSdkClientEntity(options) {
   );
   let failed = false;
   try {
-    await Promise.race([client.waitForInitialization(), new Promise((resolve, reject) => setTimeout(reject, timeout))]);
+    await client.waitForInitialization(timeout);
   } catch (_) {
-    // we get here if waitForInitialization() rejects or if we timed out
-    failed = true
+    // we get here if waitForInitialization(5) rejects or if we timed out
+    failed = true;
   }
   if (failed && !options.configuration.initCanFail) {
     client.close();
