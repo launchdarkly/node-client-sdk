@@ -36,7 +36,7 @@ describe('LDClient streaming', () => {
         };
         await withCloseable(LDClient.initialize(envName, context, config), async client => {
           const changeEvents = eventSink(client, 'change:flag');
-          await client.waitForInitialization();
+          await client.waitForInitialization(5);
 
           const value = await changeEvents.take();
           expect(value).toEqual(['yes', undefined]); // second parameter to change event is old value
@@ -64,7 +64,7 @@ describe('LDClient streaming', () => {
         };
         await withCloseable(LDClient.initialize(envName, context, config), async client => {
           const changeEvents = eventSink(client, 'change:flag');
-          await client.waitForInitialization();
+          await client.waitForInitialization(5);
 
           const value = await changeEvents.take();
           expect(value).toEqual(['yes', undefined]); // second parameter to change event is old value

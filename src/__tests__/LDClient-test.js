@@ -21,7 +21,7 @@ describe('LDClient', () => {
         server.byDefault(TestHttpHandlers.respondJson({}));
         const config = { baseUrl: server.url, sendEvents: false };
         await withCloseable(LDClient.initialize(envName, context, config), async client => {
-          await client.waitForInitialization();
+          await client.waitForInitialization(5);
         });
       });
     });
@@ -31,7 +31,7 @@ describe('LDClient', () => {
         server.byDefault(TestHttpHandlers.respondJson({}));
         const config = { baseUrl: server.url, sendEvents: false };
         await withCloseable(LDClient.initialize(envName, context, config), async client => {
-          await client.waitForInitialization();
+          await client.waitForInitialization(5);
 
           expect(server.requestCount()).toEqual(1);
           const req = await server.nextRequest();
@@ -51,7 +51,7 @@ describe('LDClient', () => {
       };
       const config = { bootstrap: {}, sendEvents: false, logger: logger };
       await withCloseable(LDClient.initialize(envName, context, config), async client => {
-        await client.waitForInitialization();
+        await client.waitForInitialization(5);
 
         client.track('whatever');
         expect(logger.warn).not.toHaveBeenCalled();

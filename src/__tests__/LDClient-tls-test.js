@@ -32,7 +32,7 @@ describe('LDClient TLS configuration', () => {
         diagnosticOptOut: true,
       };
       await withCloseable(LDClient.initialize(envName, context, config), async client => {
-        await client.waitForInitialization();
+        await client.waitForInitialization(5);
       });
     });
   });
@@ -47,7 +47,7 @@ describe('LDClient TLS configuration', () => {
         diagnosticOptOut: true,
       };
       await withCloseable(LDClient.initialize(envName, context, config), async client => {
-        await expect(client.waitForInitialization()).rejects.toThrow(/network error.*self[- ]signed/);
+        await expect(client.waitForInitialization(5)).rejects.toThrow(/network error.*self[- ]signed/);
       });
     });
   });
@@ -71,7 +71,7 @@ describe('LDClient TLS configuration', () => {
         await withCloseable(LDClient.initialize(envName, context, config), async client => {
           const changeEvents = eventSink(client, 'change:flag');
 
-          await client.waitForInitialization();
+          await client.waitForInitialization(5);
 
           const value = await changeEvents.take();
           expect(value).toEqual(['yes', undefined]); // second parameter to change event is old value
@@ -92,7 +92,7 @@ describe('LDClient TLS configuration', () => {
         diagnosticOptOut: true,
       };
       await withCloseable(LDClient.initialize(envName, context, config), async client => {
-        await client.waitForInitialization();
+        await client.waitForInitialization(5);
         await client.flush();
 
         expect(server.requestCount()).toEqual(1);
