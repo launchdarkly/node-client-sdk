@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.2.1] - 2024-05-23
+### Fixed:
+- Updated `launchdarkly-evensource` to version `2.0.3` which includes improvements to error handling and shutdown of SSE streams.
+
 ## [3.2.0] - 2024-05-01
 ### Added:
 - Added an optional timeout to the `waitForInitialization` method. When a timeout is specified the returned promise will be rejected after the timeout elapses if the client has not finished initializing within that time. When no timeout is specified the returned promise will not be resolved or rejected until the initialization either completes or fails.
