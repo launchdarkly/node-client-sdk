@@ -20,6 +20,8 @@ jobs:
         ]
 
     runs-on: ${{ matrix.variations.os }}
+    env:
+      TEST_SERVICE_PORT: 8000
 
     steps:
       - uses: actions/checkout@v4
@@ -35,5 +37,11 @@ jobs:
         run: npm run lint:all
       - name: Check typescript
         run: npm run check-typescript
+      - name: Run contract test service
+        run: npm run contract-test-service 2>&1 &
+      - uses: launchdarkly/gh-actions/actions/contract-tests@contract-tests-v1.0.0
+        with:
+          test_service_port: ${{ env.TEST_SERVICE_PORT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Docs
         run: npm run doc
