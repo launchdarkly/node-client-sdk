@@ -1,6 +1,16 @@
-declare module 'launchdarkly-node-client-sdk' {
+/**
+* This is the API reference for the LaunchDarkly Client-Side Node SDK.
+*
+*
+* In typical usage, you will call {@link initialize} once at startup time to obtain an instance of
+* {@link LDClient}, which provides access to all of the SDK's functionality.
+*
+* For more information, see the [SDK reference guide](https://docs.launchdarkly.com/sdk/client-side/node-js).
+*
+* @packageDocumentation
+*/
 
-//// DOCBUILD-START-REPLACE  (see docs/Makefile)
+declare module 'launchdarkly-node-client-sdk' {
   export * from 'launchdarkly-js-sdk-common';
 
   import {
@@ -14,7 +24,6 @@ declare module 'launchdarkly-node-client-sdk' {
     LDOptionsBase,
     LDContext
   } from 'launchdarkly-js-sdk-common';
-//// DOCBUILD-END-REPLACE
 
   /**
    * The current version string of the SDK.
@@ -26,13 +35,13 @@ declare module 'launchdarkly-node-client-sdk' {
    *
    * Applications should instantiate a single instance for the lifetime of the application.
    * The client will begin attempting to connect to LaunchDarkly as soon as it is created. To
-   * determine when it is ready to use, call [[LDClient.waitForInitialization]], or register an
-   * event listener for the `"ready"` event using [[LDClient.on]].
+   * determine when it is ready to use, call {@link LDClient.waitForInitialization}, or register an
+   * event listener for the `"ready"` event using {@link LDClient.on}.
    *
    * @param envKey
    *   The LaunchDarkly environment ID.
    * @param context
-   *   The initial context properties. These can be changed later with [[LDClient.identify]].
+   *   The initial context properties. These can be changed later with {@link LDClient.identify}.
    *   The context must have a `key` property, except that if you omit `context.key` and set `context.anonymous` to
    *   true, the SDK will create a randomized unique key (which will be cached in local storage for the
    *   current OS user account, so the next initialization will reuse the same key).
@@ -61,8 +70,8 @@ declare module 'launchdarkly-node-client-sdk' {
   /**
    * Additional parameters to pass to the Node HTTPS API for secure requests. These can include any
    * of the TLS-related parameters supported by `https.request()`, such as `ca`, `cert`, and `key`.
-   * This object should be stored in the `tlsParams` property of [[LDOptions]].
-   * 
+   * This object should be stored in the `tlsParams` property of {@link LDOptions}.
+   *
    * For more information, see the Node documentation for `https.request()` and `tls.connect()`.
    */
   export interface LDTLSOptions {
@@ -81,7 +90,7 @@ declare module 'launchdarkly-node-client-sdk' {
   /**
    * The LaunchDarkly SDK client object.
    *
-   * Applications should configure the client at startup time with [[initialize]], and reuse the same instance.
+   * Applications should configure the client at startup time with {@link initialize}, and reuse the same instance.
    *
    * For more information, see the [SDK Reference Guide](https://docs.launchdarkly.com/sdk/client-side/node-js).
    */
@@ -89,19 +98,19 @@ declare module 'launchdarkly-node-client-sdk' {
   }
 
   /**
-   * Provides a simple [[LDLogger]] implementation.
+   * Provides a simple {@link LDLogger} implementation.
    *
    * This logging implementation uses a simple format that includes only the log level
    * and the message text. Output is written to the standard error stream (`console.error`).
-   * You can filter by log level as described in [[BasicLoggerOptions.level]].
+   * You can filter by log level as described in {@link BasicLoggerOptions.level}.
    *
-   * To use the logger created by this function, put it into [[LDOptions.logger]]. If
-   * you do not set [[LDOptions.logger]] to anything, the SDK uses a default logger
+   * To use the logger created by this function, put it into {@link LDOptions.logger}. If
+   * you do not set {@link LDOptions.logger} to anything, the SDK uses a default logger
    * that is equivalent to `ld.basicLogger({ level: 'info' })`.
    *
    * @param options Configuration for the logger. If no options are specified, the
    *   logger uses `{ level: 'info' }`.
-   * 
+   *
    * @example
    * This example shows how to use `basicLogger` in your SDK options to enable console
    * logging only at `warn` and `error` levels.
@@ -120,7 +129,7 @@ declare module 'launchdarkly-node-client-sdk' {
    *   };
    * ```
    */
-   export function basicLogger(
+  export function basicLogger(
     options?: BasicLoggerOptions
   ): LDLogger;
 }
