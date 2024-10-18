@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
       'user-type',
       'inline-context',
       'anonymous-redaction',
+      'client-prereq-events',
     ],
   });
 });
