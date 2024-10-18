@@ -2,6 +2,13 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.3.0](https://github.com/launchdarkly/node-client-sdk/compare/3.2.1...3.3.0) (2024-10-18)
+
+
+### Features
+
+* Add support for client-side prerequisite events. ([#49](https://github.com/launchdarkly/node-client-sdk/issues/49)) ([7495877](https://github.com/launchdarkly/node-client-sdk/commit/7495877e9bcff857b3ba6cef36e0de8a9120c57e))
+
 ## [3.2.1] - 2024-05-23
 ### Fixed:
 - Updated `launchdarkly-evensource` to version `2.0.3` which includes improvements to error handling and shutdown of SSE streams.
