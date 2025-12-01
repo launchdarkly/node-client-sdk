@@ -65,6 +65,14 @@ declare module 'launchdarkly-node-client-sdk' {
      * of the TLS-related parameters supported by `https.request()`, such as `ca`, `cert`, and `key`.
      */
     tlsParams?: LDTLSOptions;
+
+    /**
+     * The signed context key for Secure Mode.
+     *
+     * For more information, see the JavaScript SDK Reference Guide on
+     * [Secure mode](https://launchdarkly.com/docs/sdk/features/secure-mode#configure-secure-mode-in-javascript-based-sdks).
+     */
+    hash?: string;
   }
 
   /**
