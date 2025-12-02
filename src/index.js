@@ -10,6 +10,7 @@ function initialize(env, context, options = {}) {
   const extraOptionDefs = {
     localStoragePath: { type: 'string' },
     tlsParams: { type: 'object' },
+    hash: { type: 'string' },
   };
   if (!options.logger) {
     extraOptionDefs.logger = { default: basicLogger() };
