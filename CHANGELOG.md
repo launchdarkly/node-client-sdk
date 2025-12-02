@@ -2,6 +2,13 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.3.1](https://github.com/launchdarkly/node-client-sdk/compare/3.3.0...3.3.1) (2025-12-02)
+
+
+### Bug Fixes
+
+* Correct typing and prevents warnings for secure mode hash during initialization. ([#59](https://github.com/launchdarkly/node-client-sdk/issues/59)) ([33c129d](https://github.com/launchdarkly/node-client-sdk/commit/33c129de7b7a8032d2749445058e0aeca9e38b10)), closes [#57](https://github.com/launchdarkly/node-client-sdk/issues/57)
+
 ## [3.3.0](https://github.com/launchdarkly/node-client-sdk/compare/3.2.1...3.3.0) (2024-10-18)
 
 
