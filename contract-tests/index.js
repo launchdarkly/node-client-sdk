@@ -25,8 +25,9 @@ app.get('/', (req, res) => {
       'tags',
       'user-type',
       'inline-context',
-      'anonymous-redaction',
+      'inline-context-all',
       'client-prereq-events',
+      'client-per-context-summaries',
     ],
   });
 });
