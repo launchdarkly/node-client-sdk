@@ -2,6 +2,25 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.4.0](https://github.com/launchdarkly/node-client-sdk/compare/3.3.1...3.4.0) (2026-05-26)
+
+
+### Features
+
+* add experimental debug override functionality ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+* add hook support ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+* add support for per-context summary events ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+* add support for plugins ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+* add support for the afterTrack stage for hooks ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+* inline context in custom events ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+
+
+### Bug Fixes
+
+* add hooks to default options to prevent warning ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+* remove uuid dependency, replace with inline implementation ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+* update launchdarkly-js-sdk-common to 5.8.1 ([532df60](https://github.com/launchdarkly/node-client-sdk/commit/532df60292372fab03f178827bdadc2166f9da02))
+
 ## [3.3.1](https://github.com/launchdarkly/node-client-sdk/compare/3.3.0...3.3.1) (2025-12-02)
 
 
