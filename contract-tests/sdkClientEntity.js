@@ -1,6 +1,7 @@
 const ld = require('launchdarkly-node-client-sdk');
 
 const { Log, sdkLogger } = require('./log');
+const { TestHook } = require('./TestHook');
 
 const badCommandError = new Error('unsupported command');
 
@@ -58,6 +59,12 @@ function makeSdkConfig(options, tag) {
       id: options.tags.applicationId,
       version: options.tags.applicationVersion
     };
+  }
+
+  if (options.hooks) {
+    cf.hooks = options.hooks.hooks.map(
+      hook => new TestHook(hook.name, hook.callbackUri, hook.data, hook.errors)
+    );
   }
 
   return cf;

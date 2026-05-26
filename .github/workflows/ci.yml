@@ -43,5 +43,6 @@ jobs:
         with:
           test_service_port: ${{ env.TEST_SERVICE_PORT }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          extra_params: '--skip-from=${{ github.workspace }}/contract-tests/suppressions.txt'
       - name: Build Docs
         run: npm run doc

@@ -28,6 +28,8 @@ app.get('/', (req, res) => {
       'inline-context-all',
       'client-prereq-events',
       'client-per-context-summaries',
+      'evaluation-hooks',
+      'track-hooks',
     ],
   });
 });
