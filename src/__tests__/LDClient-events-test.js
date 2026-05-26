@@ -30,7 +30,7 @@ describe('LDClient', () => {
           const trackEvent = events[1];
           expect(trackEvent.kind).toEqual('custom');
           expect(trackEvent.key).toEqual('eventkey');
-          expect(trackEvent.contextKeys).toEqual({ user: 'user' });
+          expect(trackEvent.context).toEqual({ kind: 'user', key: 'user' });
           expect(trackEvent.data).toEqual(data);
           expect(trackEvent.url).toEqual(null);
         });
