@@ -1,3 +1,10 @@
+# Use [@launchdarkly/node-client-sdk](https://www.npmjs.com/package/@launchdarkly/node-client-sdk) instead of this package.
+
+The `launchdarkly-node-client-sdk` project has been renamed `@launchdarkly/node-client-sdk` and all future releases will be made from the
+[new repository](https://github.com/launchdarkly/js-core/tree/main/packages/sdk/node-client). Please consider upgrading and filing issues
+and requests in that repository's [issue tracker](https://github.com/launchdarkly/js-core/issues).
+# ☝️☝️☝️☝️☝️☝️
+
 # LaunchDarkly Client-Side SDK for Node.js
 
 [![NPM](https://img.shields.io/npm/v/launchdarkly-node-client-sdk.svg?style=flat-square)](https://www.npmjs.com/package/launchdarkly-node-client-sdk)
