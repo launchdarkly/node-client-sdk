@@ -2,6 +2,14 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.4.2](https://github.com/launchdarkly/node-client-sdk/compare/3.4.1...3.4.2) (2026-08-04)
+
+
+### Bug Fixes
+
+* addiing migration banner ([b5ba7ca](https://github.com/launchdarkly/node-client-sdk/commit/b5ba7cab1ba24c11184140875176db8f24bd9226))
+* adding migration banner ([#74](https://github.com/launchdarkly/node-client-sdk/issues/74)) ([842e3ba](https://github.com/launchdarkly/node-client-sdk/commit/842e3ba0d4f6f251a8097618e88bde00f1cd7b34))
+
 ## [3.4.1](https://github.com/launchdarkly/node-client-sdk/compare/3.4.0...3.4.1) (2026-07-20)
 
 
