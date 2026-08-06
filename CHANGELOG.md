@@ -2,6 +2,14 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.4.3](https://github.com/launchdarkly/node-client-sdk/compare/3.4.2...3.4.3) (2026-08-06)
+
+
+### Bug Fixes
+
+* update launchdarkly-js-sdk-common to 5.8.3 ([#76](https://github.com/launchdarkly/node-client-sdk/issues/76)) ([f8b22b5](https://github.com/launchdarkly/node-client-sdk/commit/f8b22b51f32f28f8767ba89568f9515abc33b5ad))
+* update launchdarkly-js-sdk-common to 5.8.3 and add dependency cooldown ([4006e24](https://github.com/launchdarkly/node-client-sdk/commit/4006e24c5ab53874d720a9d6ac592f2194ab594f))
+
 ## [3.4.2](https://github.com/launchdarkly/node-client-sdk/compare/3.4.1...3.4.2) (2026-08-04)
 
 
