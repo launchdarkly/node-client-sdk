@@ -72,6 +72,32 @@ describe('nodePlatform', () => {
         await expect(requestInfo.promise).rejects.toThrow();
       });
     });
+
+    it('rejects promise if the connection closes before the response body is complete', async () => {
+      await withCloseable(TestHttpServers.start, async server => {
+        server.byDefault((req, res) => {
+          res.writeHead(200, { 'Content-Type': 'application/json', 'Content-Length': 100 });
+          // Send part of the body, then close the connection normally.
+          res.write('{"flag":', () => res.socket.end());
+        });
+        const requestInfo = platform.httpRequest('GET', server.url);
+
+        await expect(requestInfo.promise).rejects.toThrow();
+      });
+    });
+
+    it('rejects promise if the connection is reset before the response body is complete', async () => {
+      await withCloseable(TestHttpServers.start, async server => {
+        server.byDefault((req, res) => {
+          res.writeHead(200, { 'Content-Type': 'application/json', 'Content-Length': 100 });
+          // Send part of the body, then reset the connection.
+          res.write('{"flag":', () => res.socket.resetAndDestroy());
+        });
+        const requestInfo = platform.httpRequest('GET', server.url);
+
+        await expect(requestInfo.promise).rejects.toThrow();
+      });
+    });
   });
 
   describe('getCurrentUrl()', () => {
