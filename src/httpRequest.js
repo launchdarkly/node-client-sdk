@@ -29,6 +29,15 @@ function newHttpRequest(method, requestUrl, headers, body, tlsParams) {
           body: resBody,
         });
       });
+      // The response can stop before the body is complete, for example if the connection closes or
+      // resets. Reject the request in that case. Some Node versions send an error event, and others
+      // send only a close event.
+      res.on('error', reject);
+      res.on('close', () => {
+        if (!res.complete) {
+          reject(new Error('the connection closed before the response body was complete'));
+        }
+      });
     });
 
     request.on('error', reject);
