@@ -23,7 +23,7 @@ For using LaunchDarkly in *server-side* Node.js applications, refer to our [Serv
 
 ## Supported Node versions
 
-This version of the LaunchDarkly SDK is compatible with Node.js versions 12 and above.
+While this version of the LaunchDarkly SDK requires Node.js 12 or later, you should use the latest patched version of a supported Node.js release.
 
 ## Getting started
 
