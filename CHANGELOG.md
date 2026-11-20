@@ -2,6 +2,13 @@
 
 All notable changes to the LaunchDarkly Client-Side SDK for Node.js will be documented in this file.
 
+## [3.4.4](https://github.com/launchdarkly/node-client-sdk/compare/3.4.3...3.4.4) (2026-11-20)
+
+
+### Bug Fixes
+
+* Fail the flag request when the response body is cut off ([#80](https://github.com/launchdarkly/node-client-sdk/issues/80)) ([3ca3ac7](https://github.com/launchdarkly/node-client-sdk/commit/3ca3ac7752426b56614cfdc933ac8194ea837a0c))
+
 ## [3.4.3](https://github.com/launchdarkly/node-client-sdk/compare/3.4.2...3.4.3) (2026-08-06)
 
 
