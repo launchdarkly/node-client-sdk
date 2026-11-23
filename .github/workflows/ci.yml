@@ -39,7 +39,7 @@ jobs:
         run: npm run check-typescript
       - name: Run contract test service
         run: npm run contract-test-service 2>&1 &
-      - uses: launchdarkly/gh-actions/actions/contract-tests@contract-tests/v1.3.0
+      - uses: launchdarkly/gh-actions/actions/contract-tests@contract-tests/v1
         with:
           test_service_port: ${{ env.TEST_SERVICE_PORT }}
           token: ${{ secrets.GITHUB_TOKEN }}
