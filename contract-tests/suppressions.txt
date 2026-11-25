@@ -1,2 +1,6 @@
 hooks/evaluation/executes beforeEvaluation hooks in registration order
 hooks/track/executes afterTrack hooks in registration order
+streaming/requests/context properties/old user with private attribute names that look like references/GET
+streaming/requests/context properties/old user with private attribute names that look like references/REPORT
+polling/requests/context properties/old user with private attribute names that look like references/GET
+polling/requests/context properties/old user with private attribute names that look like references/REPORT
